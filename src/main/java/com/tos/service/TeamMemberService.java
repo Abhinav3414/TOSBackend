@@ -6,9 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.tos.model.Employee;
 import com.tos.model.TeamMember;
-import com.tos.repository.EmployeeRepository;
 import com.tos.repository.TeamMemberRepository;
 
 @Service
