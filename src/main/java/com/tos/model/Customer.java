@@ -30,6 +30,8 @@ public class Customer {
 	private Long id;
 	private String name;
 	private String contact;
+	private String contactPerson;
+	private String domain;
 	
 	@OneToMany(cascade = CascadeType.ALL, targetEntity= Address.class)
 	@JoinColumn(name = "address_cust_id")
@@ -79,6 +81,22 @@ public class Customer {
 		this.contact = contact;
 	}
 
+	public String getContactPerson() {
+		return contactPerson;
+	}
+
+	public void setContactPerson(String contactPerson) {
+		this.contactPerson = contactPerson;
+	}
+
+	public String getDomain() {
+		return domain;
+	}
+
+	public void setDomain(String domain) {
+		this.domain = domain;
+	}
+
 	public List<Address> getAddresses() {
 		return addresses;
 	}
@@ -95,20 +113,20 @@ public class Customer {
 		this.goals = goals;
 	}
 
-	public List<StakeHolder> getStakeHolder() {
+	public List<StakeHolder> getStakeHolders() {
 		return stakeHolders;
 	}
 
-	public void setStakeHolder(List<StakeHolder> stakeHolder) {
-		this.stakeHolders = stakeHolder;
+	public void setStakeHolders(List<StakeHolder> stakeHolders) {
+		this.stakeHolders = stakeHolders;
 	}
 
-	public List<Team> getTeam() {
+	public List<Team> getTeams() {
 		return teams;
 	}
 
-	public void setTeam(List<Team> team) {
-		this.teams = team;
+	public void setTeams(List<Team> teams) {
+		this.teams = teams;
 	}
 
 	public Date getCreatedAt() {
@@ -118,5 +136,5 @@ public class Customer {
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
-	
+
 }

@@ -25,21 +25,19 @@ public class StakeHolder {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	private String sponsor;
+	private String name;
 	
 	@NotNull
 	@Column(name="stakeholder_cust_id")
 	private Long customerId;
 	
-	private String productOwner;
+	private String role;
 	
-	private String productManager;
+	private String email;
 	
-	private String architect;
+	private String phoneNo;
 	
-	private String customerTeamManager;
-	
-	private String programManager;
+	private String raci;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@LastModifiedDate
@@ -56,12 +54,12 @@ public class StakeHolder {
 		this.id = id;
 	}
 
-	public String getSponsor() {
-		return sponsor;
+	public String getName() {
+		return name;
 	}
 
-	public void setSponsor(String sponsor) {
-		this.sponsor = sponsor;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public Long getCustomerId() {
@@ -72,44 +70,36 @@ public class StakeHolder {
 		this.customerId = customerId;
 	}
 
-	public String getProductOwner() {
-		return productOwner;
+	public String getRole() {
+		return role;
 	}
 
-	public void setProductOwner(String productOwner) {
-		this.productOwner = productOwner;
+	public void setRole(String role) {
+		this.role = role;
 	}
 
-	public String getProductManager() {
-		return productManager;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setProductManager(String productManager) {
-		this.productManager = productManager;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
-	public String getArchitect() {
-		return architect;
+	public String getPhoneNo() {
+		return phoneNo;
 	}
 
-	public void setArchitect(String architect) {
-		this.architect = architect;
+	public void setPhoneNo(String phoneNo) {
+		this.phoneNo = phoneNo;
 	}
 
-	public String getCustomerTeamManager() {
-		return customerTeamManager;
+	public String getRaci() {
+		return raci;
 	}
 
-	public void setCustomerTeamManager(String customerTeamManager) {
-		this.customerTeamManager = customerTeamManager;
-	}
-
-	public String getProgramManager() {
-		return programManager;
-	}
-
-	public void setProgramManager(String programManager) {
-		this.programManager = programManager;
+	public void setRaci(String raci) {
+		this.raci = raci;
 	}
 
 	public Date getCreatedAt() {
