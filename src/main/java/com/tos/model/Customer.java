@@ -49,6 +49,10 @@ public class Customer {
 	@JoinColumn(name = "team_cust_id")
 	private List<Team> teams;
 	
+	@OneToMany(cascade = CascadeType.ALL, targetEntity= Travel.class)
+	@JoinColumn(name = "travel_cust_id")
+	private List<Travel> travels;
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	@LastModifiedDate
 	private Date createdAt;
@@ -127,6 +131,14 @@ public class Customer {
 
 	public void setTeams(List<Team> teams) {
 		this.teams = teams;
+	}
+
+	public List<Travel> getTravels() {
+		return travels;
+	}
+
+	public void setTravels(List<Travel> travels) {
+		this.travels = travels;
 	}
 
 	public Date getCreatedAt() {

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tos.model.Team;
 import com.tos.model.TeamMember;
 import com.tos.service.TeamMemberService;
 
@@ -40,7 +41,7 @@ public class TeamMemberController {
 		return teamMemberService.addTeamMember(teamMember);
 	}
 	
-	@RequestMapping(method=RequestMethod.PUT, value ="/teamMembers/{id}" )
+	@RequestMapping(method=RequestMethod.PUT, value ="/teammembers/{id}" )
 	public ResponseEntity<TeamMember> updateTeamMember(@Valid @RequestBody TeamMember teamMember, @PathVariable Long id) {
 		return teamMemberService.updateTeamMember(teamMember, id);
 	}
