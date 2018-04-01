@@ -22,8 +22,7 @@ public class FeedbackService {
 	
 	/*to save a feedback */
 	public Feedback addFeedback(Feedback feedback) {
-		feedbackRepository.save(feedback);
-		return feedbackRepository.findOne(feedback.getId());
+		return feedbackRepository.save(feedback);
 	}
 	
 	/*get a feedback by id*/
@@ -32,19 +31,21 @@ public class FeedbackService {
 	}
 
 	/*to update a feedback*/
-	public ResponseEntity<Feedback> updateFeedback(Feedback feedbackData, long id) {
-		Feedback feedback=feedbackRepository.findOne(id);
-		if(feedback==null) {
-			return ResponseEntity.notFound().build();
+	public Feedback updateFeedback(Feedback feedbackData, long id) {
+		if(feedbackRepository.findOne(id)==null) {
+			return null;
 		}
-		Feedback updateFeedback = feedbackRepository.save(feedbackData);
-		return ResponseEntity.ok().body(updateFeedback);
+		return feedbackRepository.save(feedbackData);
 	}
 	
 	/*delete a feedback*/
-	public Feedback deleteFeedback(Long feedbackId) {
-		Feedback feedback = feedbackRepository.findOne(feedbackId);
+	public boolean deleteFeedback(Long feedbackId) {
+		if(feedbackRepository.findOne(feedbackId)==null) {
+			return false;
+		}
 		feedbackRepository.delete(feedbackId);
-		return feedback;
+		return true;
 	}
+	
+	
 }

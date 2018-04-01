@@ -22,8 +22,7 @@ public class TeamService {
 	
 	/*to save a team */
 	public Team addTeam(Team team) {
-		teamRepository.save(team);
-		return teamRepository.findOne(team.getId());
+		return teamRepository.save(team);
 	}
 	
 	/*get a team by id*/
@@ -32,19 +31,20 @@ public class TeamService {
 	}
 
 	/*to update a team*/
-	public ResponseEntity<Team> updateTeam(Team teamData, long id) {
-		Team team=teamRepository.findOne(id);
-		if(team==null) {
-			return ResponseEntity.notFound().build();
+	public Team updateTeam(Team teamData, long id) {
+		if(teamRepository.findOne(id)==null) {
+			return null;
 		}
-		Team updateTeam=teamRepository.save(teamData);
-		return ResponseEntity.ok().body(updateTeam);
+		return teamRepository.save(teamData);
 	}
 	
 	/*delete a team*/
-	public Team deleteTeam(Long teamId) {
-		Team team = teamRepository.findOne(teamId);
+	public boolean deleteTeam(Long teamId) {
+		if(teamRepository.findOne(teamId)==null) {
+			return false;
+		}
 		teamRepository.delete(teamId);
-		return team;
+		return true;
 	}
+	
 }

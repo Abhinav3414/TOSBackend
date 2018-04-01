@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.tos.model.Action;
+import com.tos.model.Address;
 import com.tos.repository.ActionRepository;
 
 @Service
@@ -22,8 +23,7 @@ public class ActionService {
 	
 	/*to save a action */
 	public Action addAction(Action action) {
-		actionRepository.save(action);
-		return actionRepository.findOne(action.getId());
+		return actionRepository.save(action);
 	}
 	
 	/*get a action by id*/
@@ -32,19 +32,21 @@ public class ActionService {
 	}
 
 	/*to update a action*/
-	public ResponseEntity<Action> updateAction(Action actionData, long id) {
-		Action action=actionRepository.findOne(id);
-		if(action==null) {
-			return ResponseEntity.notFound().build();
+	public Action updateAction(Action actionData, long id) {
+		if(actionRepository.findOne(id)==null) {
+			return null;
 		}
-		Action updateAction=actionRepository.save(actionData);
-		return ResponseEntity.ok().body(updateAction);
+		return actionRepository.save(actionData);
 	}
 	
 	/*delete a action*/
-	public Action deleteAction(Long actionId) {
-		Action action = actionRepository.findOne(actionId);
+	public boolean deleteAction(Long actionId) {
+		if(actionRepository.findOne(actionId)==null) {
+			return false;
+		}
 		actionRepository.delete(actionId);
-		return action;
+		return true;
 	}
+	
+	
 }

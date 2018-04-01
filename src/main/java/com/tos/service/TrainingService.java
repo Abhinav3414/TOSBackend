@@ -22,8 +22,7 @@ public class TrainingService {
 	
 	/*to save a training */
 	public Training addTraining(Training training) {
-		trainingRepository.save(training);
-		return trainingRepository.findOne(training.getId());
+		return trainingRepository.save(training);
 	}
 	
 	/*get a training by id*/
@@ -32,19 +31,20 @@ public class TrainingService {
 	}
 
 	/*to update a training*/
-	public ResponseEntity<Training> updateTraining(Training trainingData, long id) {
-		Training training=trainingRepository.findOne(id);
-		if(training==null) {
-			return ResponseEntity.notFound().build();
+	public Training updateTraining(Training trainingData, long id) {
+		if(trainingRepository.findOne(id)==null) {
+			return null;
 		}
-		Training updateTraining = trainingRepository.save(trainingData);
-		return ResponseEntity.ok().body(updateTraining);
+		return trainingRepository.save(trainingData);
 	}
 	
 	/*delete a training*/
-	public Training deleteTraining(Long trainingId) {
-		Training training = trainingRepository.findOne(trainingId);
+	public boolean deleteTraining(Long trainingId) {
+		if(trainingRepository.findOne(trainingId)==null) {
+			return false;
+		}
 		trainingRepository.delete(trainingId);
-		return training;
+		return true;
 	}
+	
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.tos.model.Action;
 import com.tos.model.Employee;
 import com.tos.repository.EmployeeRepository;
 
@@ -22,8 +23,7 @@ public class EmployeeService {
 	
 	/*to save an employee*/
 	public Employee addEmployee(Employee emp) {
-		employeeRepository.save(emp);
-		return employeeRepository.findOne(emp.getId());
+		return employeeRepository.save(emp);
 	}
 	
 	/*get an employee by id*/
@@ -32,19 +32,21 @@ public class EmployeeService {
 	}
 
 	/*to update an employee*/
-	public ResponseEntity<Employee> updateEmployee(Employee emp, long id) {
-		Employee employee=employeeRepository.findOne(id);
-		if(employee==null) {
-			return ResponseEntity.notFound().build();
+	public Employee updateEmployee(Employee emp, long id) {
+		if(employeeRepository.findOne(id)==null) {
+			return null;
 		}
-		Employee updateEmployee=employeeRepository.save(emp);
-		return ResponseEntity.ok().body(updateEmployee);
+		return employeeRepository.save(emp);
 	}
 	
 	/*delete an employee*/
-	public Employee deleteEmployee(Long empId) {
-		Employee emp = employeeRepository.findOne(empId);
+	public boolean deleteEmployee(Long empId) {
+		if(employeeRepository.findOne(empId)==null) {
+			return false;
+		}
 		employeeRepository.delete(empId);
-		return emp;
+		return true;
 	}
+	
+	
 }

@@ -2,6 +2,10 @@ package com.tos.service;
 
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -22,8 +26,7 @@ public class CustomerService {
 	
 	/*to save an customer*/
 	public Customer addCustomer(Customer cust) {
-		customerRepository.save(cust);
-		return customerRepository.findOne(cust.getId());
+		return customerRepository.save(cust);
 	}
 	
 	/*get an customer by id*/
@@ -32,19 +35,21 @@ public class CustomerService {
 	}
 
 	/*to update an customer*/
-	public ResponseEntity<Customer> updateCustomer(Customer cust, long id) {
-		Customer customer=customerRepository.findOne(id);
-		if(customer==null) {
-			return ResponseEntity.notFound().build();
+	public Customer updateCustomer(Customer cust, long id) {
+		if(customerRepository.findOne(id)==null) {
+			return null;
 		}
-		Customer updateCustomer=customerRepository.save(cust);
-		return ResponseEntity.ok().body(updateCustomer);
+		return customerRepository.save(cust);
 	}
 	
 	/*delete an customer*/
-	public Customer deleteCustomer(Long custId) {
-		Customer cust = customerRepository.findOne(custId);
+	public boolean deleteCustomer(Long custId) {
+		
+		if(customerRepository.findOne(custId)==null) {
+			return false;
+		}
 		customerRepository.delete(custId);
-		return cust;
+		return true;
 	}
+	
 }

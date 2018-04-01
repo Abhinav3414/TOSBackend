@@ -20,31 +20,30 @@ public class TravelService {
 		return travelRepository.findAll();
 	}
 	
-	/*to save a travel */
-	public Travel addTravel(Travel travel) {
-		travelRepository.save(travel);
-		return travelRepository.findOne(travel.getId());
-	}
-	
 	/*get a travel by id*/
 	public Travel getTravel(Long travelId) {
 		return travelRepository.findOne(travelId);
 	}
 
+	/*to save a travel */
+	public Travel addTravel(Travel travel) {
+		return travelRepository.save(travel);
+	}
+	
 	/*to update a travel*/
-	public ResponseEntity<Travel> updateTravel(Travel travelData, long id) {
-		Travel travel=travelRepository.findOne(id);
-		if(travel==null) {
-			return ResponseEntity.notFound().build();
+	public Travel updateTravel(Travel travelData, long id) {
+		if(travelRepository.findOne(id)==null) {
+			return null;
 		}
-		Travel updateTravel=travelRepository.save(travelData);
-		return ResponseEntity.ok().body(updateTravel);
+		return travelRepository.save(travelData);
 	}
 	
 	/*delete a travel*/
-	public Travel deleteTravel(Long travelId) {
-		Travel emp = travelRepository.findOne(travelId);
+	public boolean deleteTravel(Long travelId) {
+		if(travelRepository.findOne(travelId)==null) {
+			return false;
+		}
 		travelRepository.delete(travelId);
-		return emp;
+		return true;
 	}
 }

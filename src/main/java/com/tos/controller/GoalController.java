@@ -5,14 +5,15 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tos.model.Goal;
@@ -36,18 +37,29 @@ public class GoalController {
 	}
 	
 	@PostMapping("/goals")
-	public Goal addGoal(@RequestBody Goal goal) {
-		return goalService.addGoal(goal);
+	public ResponseEntity<Goal> addGoal(@RequestBody Goal goal) {
+		Goal custGoal = goalService.addGoal(goal);
+		if(custGoal==null) {
+			return new ResponseEntity<Goal>(custGoal, HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<Goal>(custGoal, HttpStatus.OK);
 	}
 	
-	@RequestMapping(method=RequestMethod.PUT, value ="/goals/{id}" )
-	public ResponseEntity<Goal> updateGoal(@Valid @RequestBody Goal goal, @PathVariable Long id) {
-		return goalService.updateGoal(goal, id);
+	@PutMapping("/goals/{id}")
+	public ResponseEntity<Void> updateGoal(@Valid @RequestBody Goal goal, @PathVariable Long id) {
+		if(goalService.updateGoal(goal, id)==null) {
+			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
 	}
 	
 	@DeleteMapping("/goals/{id}")
-	public Goal deleteGoal(@PathVariable long id) {
-		return goalService.deleteGoal(id);
+	public ResponseEntity<Void> deleteGoal(@PathVariable long id) {
+		if(goalService.deleteGoal(id)==false) {
+			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
 	}
+	
 	
 }

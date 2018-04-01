@@ -5,14 +5,15 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tos.model.Training;
@@ -36,18 +37,28 @@ public class TrainingController {
 	}
 	
 	@PostMapping("/trainings")
-	public Training addTraining(@RequestBody Training training) {
-		return trainingService.addTraining(training);
+	public ResponseEntity<Training> addTraining(@RequestBody Training training) {
+		Training empTraining = trainingService.addTraining(training);
+		if(empTraining ==null) {
+			return new ResponseEntity<Training>(empTraining, HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<Training>(empTraining, HttpStatus.OK);
 	}
 	
-	@RequestMapping(method=RequestMethod.PUT, value ="/trainings/{id}" )
-	public ResponseEntity<Training> updateTraining(@Valid @RequestBody Training training, @PathVariable Long id) {
-		return trainingService.updateTraining(training, id);
+	@PutMapping("/trainings/{id}")
+	public ResponseEntity<Void> updateTraining(@Valid @RequestBody Training training, @PathVariable Long id) {
+		if(trainingService.updateTraining(training, id)==null) {
+			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
 	}
 	
 	@DeleteMapping("/trainings/{id}")
-	public Training deleteSkill(@PathVariable long id) {
-		return trainingService.deleteTraining(id);
+	public ResponseEntity<Void> deleteTraining(@PathVariable long id) {
+		if(trainingService.deleteTraining(id)==false) {
+			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
 	}
 	
 }

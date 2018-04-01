@@ -5,14 +5,15 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tos.model.Travel;
@@ -36,18 +37,28 @@ public class TravelController {
 	}
 	
 	@PostMapping("/travels")
-	public Travel addTravel(@RequestBody Travel travel) {
-		return travelService.addTravel(travel);
+	public ResponseEntity<Travel> addTravel(@RequestBody Travel travel) {
+		Travel custTravel = travelService.addTravel(travel);
+		if(custTravel==null) {
+			return new ResponseEntity<Travel>(custTravel, HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<Travel>(custTravel, HttpStatus.OK);
 	}
 	
-	@RequestMapping(method=RequestMethod.PUT, value ="/travels/{id}" )
-	public ResponseEntity<Travel> updateTravel(@Valid @RequestBody Travel travel, @PathVariable Long id) {
-		return travelService.updateTravel(travel, id);
+	@PutMapping("/travels/{id}")
+	public ResponseEntity<Void> updateTravel(@Valid @RequestBody Travel travel, @PathVariable Long id) {
+		if(travelService.updateTravel(travel, id)==null) {
+			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
 	}
 	
 	@DeleteMapping("/travels/{id}")
-	public Travel deleteTravel(@PathVariable long id) {
-		return travelService.deleteTravel(id);
+	public ResponseEntity<Void> deleteTravel(@PathVariable long id) {
+		if(travelService.deleteTravel(id)==false) {
+			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
 	}
 	
 }

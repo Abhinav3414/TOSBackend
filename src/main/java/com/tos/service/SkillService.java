@@ -22,8 +22,7 @@ public class SkillService {
 	
 	/*to save a skill */
 	public Skill addSkill(Skill skill) {
-		skillRepository.save(skill);
-		return skillRepository.findOne(skill.getId());
+		return skillRepository.save(skill);
 	}
 	
 	/*get a skill by id*/
@@ -32,19 +31,20 @@ public class SkillService {
 	}
 
 	/*to update a skill*/
-	public ResponseEntity<Skill> updateSkill(Skill skillData, long id) {
-		Skill skill=skillRepository.findOne(id);
-		if(skill==null) {
-			return ResponseEntity.notFound().build();
+	public Skill updateSkill(Skill skillData, long id) {
+		if(skillRepository.findOne(id)==null) {
+			return null;
 		}
-		Skill updateSkill=skillRepository.save(skillData);
-		return ResponseEntity.ok().body(updateSkill);
+		return skillRepository.save(skillData);
 	}
 	
 	/*delete a skill*/
-	public Skill deleteSkill(Long skillId) {
-		Skill skill = skillRepository.findOne(skillId);
+	public boolean deleteSkill(Long skillId) {
+		if(skillRepository.findOne(skillId)==null) {
+			return false;
+		}
 		skillRepository.delete(skillId);
-		return skill;
+		return true;
 	}
+	
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -39,18 +40,28 @@ public class EmployeeController {
 	}
 	
 	@PostMapping("/employees")
-	public Employee addEmployee(@RequestBody Employee employee) {
-		return employeeService.addEmployee(employee);
+	public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee) {
+		Employee emp = employeeService.addEmployee(employee);
+		if(emp==null) {
+			return new ResponseEntity<Employee>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<Employee>(HttpStatus.OK);
 	}
-	
+
 	@PutMapping("/employees/{id}")
-	public ResponseEntity<Employee> updateEmployee(@Valid @RequestBody Employee employee, @PathVariable(value="id") Long id) {
-		return employeeService.updateEmployee(employee, id);
+	public ResponseEntity<Void> updateEmployee(@Valid @RequestBody Employee employee, @PathVariable(value="id") Long id) {
+		if(employeeService.updateEmployee(employee, id)==null) {
+			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
 	}
 	
 	@DeleteMapping("/employees/{id}")
-	public Employee deleteEmployee(@PathVariable long id) {
-		return employeeService.deleteEmployee(id);
+	public ResponseEntity<Void> deleteEmployee(@PathVariable long id) {
+		if(employeeService.deleteEmployee(id)==false) {
+			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
 	}
 	
 }

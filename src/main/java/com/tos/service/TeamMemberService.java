@@ -22,8 +22,7 @@ public class TeamMemberService {
 	
 	/*to save a teamMember */
 	public TeamMember addTeamMember(TeamMember teamMember) {
-		teamMemberRepository.save(teamMember);
-		return teamMemberRepository.findOne(teamMember.getId());
+		return teamMemberRepository.save(teamMember);
 	}
 	
 	/*get a teamMember by id*/
@@ -32,19 +31,21 @@ public class TeamMemberService {
 	}
 
 	/*to update a teamMember*/
-	public ResponseEntity<TeamMember> updateTeamMember(TeamMember teamMemberData, long id) {
-		TeamMember teamMember=teamMemberRepository.findOne(id);
-		if(teamMember==null) {
-			return ResponseEntity.notFound().build();
+	public TeamMember updateTeamMember(TeamMember teamMemberData, long id) {
+		if(teamMemberRepository.findOne(id)==null) {
+			return null;
 		}
-		TeamMember updateTeamMember=teamMemberRepository.save(teamMemberData);
-		return ResponseEntity.ok().body(updateTeamMember);
+		return teamMemberRepository.save(teamMemberData);
 	}
 	
 	/*delete a teamMember*/
-	public TeamMember deleteTeamMember(Long teamMemberId) {
-		TeamMember teamMember = teamMemberRepository.findOne(teamMemberId);
+	public boolean deleteTeamMember(Long teamMemberId) {
+		if(teamMemberRepository.findOne(teamMemberId)==null) {
+			return false;
+		}
 		teamMemberRepository.delete(teamMemberId);
-		return teamMember;
+		return true;
 	}
+	
+	
 }

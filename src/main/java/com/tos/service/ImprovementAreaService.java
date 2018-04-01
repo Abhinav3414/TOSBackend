@@ -22,8 +22,7 @@ public class ImprovementAreaService {
 	
 	/*to save a improvementArea */
 	public ImprovementArea addImprovementArea(ImprovementArea improvementArea) {
-		improvementAreaRepository.save(improvementArea);
-		return improvementAreaRepository.findOne(improvementArea.getId());
+		return improvementAreaRepository.save(improvementArea);
 	}
 	
 	/*get a improvementArea by id*/
@@ -32,19 +31,21 @@ public class ImprovementAreaService {
 	}
 
 	/*to update a improvementArea*/
-	public ResponseEntity<ImprovementArea> updateImprovementArea(ImprovementArea improvementAreaData, long id) {
-		ImprovementArea improvementArea=improvementAreaRepository.findOne(id);
-		if(improvementArea==null) {
-			return ResponseEntity.notFound().build();
+	public ImprovementArea updateImprovementArea(ImprovementArea improvementAreaData, long id) {
+		if(improvementAreaRepository.findOne(id)==null) {
+			return null;
 		}
-		ImprovementArea updateImprovementArea = improvementAreaRepository.save(improvementAreaData);
-		return ResponseEntity.ok().body(updateImprovementArea);
+		return improvementAreaRepository.save(improvementAreaData);
 	}
 	
 	/*delete a improvementArea*/
-	public ImprovementArea deleteImprovementArea(Long improvementAreaId) {
-		ImprovementArea improvementArea = improvementAreaRepository.findOne(improvementAreaId);
+	public boolean deleteImprovementArea(Long improvementAreaId) {
+		if(improvementAreaRepository.findOne(improvementAreaId)==null) {
+			return false;
+		}
 		improvementAreaRepository.delete(improvementAreaId);
-		return improvementArea;
+		return true;
 	}
+	
+	
 }

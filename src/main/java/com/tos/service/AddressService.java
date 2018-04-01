@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.tos.model.Address;
+import com.tos.model.Certification;
 import com.tos.repository.AddressRepository;
 
 @Service
@@ -22,8 +23,7 @@ public class AddressService {
 	
 	/*to save an address */
 	public Address addAddress(Address address) {
-		addressRepository.save(address);
-		return addressRepository.findOne(address.getId());
+		return addressRepository.save(address);
 	}
 	
 	/*get an address by id*/
@@ -32,19 +32,20 @@ public class AddressService {
 	}
 
 	/*to update an address*/
-	public ResponseEntity<Address> updateAddress(Address addressData, long id) {
-		Address address=addressRepository.findOne(id);
-		if(address==null) {
-			return ResponseEntity.notFound().build();
+	public Address updateAddress(Address addressData, long id) {
+		if(addressRepository.findOne(id)==null) {
+			return null;
 		}
-		Address updateAddress=addressRepository.save(addressData);
-		return ResponseEntity.ok().body(updateAddress);
+		return addressRepository.save(addressData);
 	}
 	
 	/*delete an address*/
-	public Address deleteAddress(Long addressId) {
-		Address address = addressRepository.findOne(addressId);
+	public boolean deleteAddress(Long addressId) {
+		if(addressRepository.findOne(addressId)==null) {
+			return false;
+		}
 		addressRepository.delete(addressId);
-		return address;
+		return true;
 	}
+	
 }

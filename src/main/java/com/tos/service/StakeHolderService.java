@@ -22,8 +22,7 @@ public class StakeHolderService {
 	
 	/*to save a stakeHolder */
 	public StakeHolder addStakeHolder(StakeHolder stakeHolder) {
-		stakeHolderRepository.save(stakeHolder);
-		return stakeHolderRepository.findOne(stakeHolder.getId());
+		return stakeHolderRepository.save(stakeHolder);
 	}
 	
 	/*get a stakeHolder by id*/
@@ -32,19 +31,20 @@ public class StakeHolderService {
 	}
 
 	/*to update a stakeHolder*/
-	public ResponseEntity<StakeHolder> updateStakeHolder(StakeHolder stakeHolderData, long id) {
-		StakeHolder stakeHolder=stakeHolderRepository.findOne(id);
-		if(stakeHolder==null) {
-			return ResponseEntity.notFound().build();
+	public StakeHolder updateStakeHolder(StakeHolder stakeHolderData, long id) {
+		if(stakeHolderRepository.findOne(id)==null) {
+			return null;
 		}
-		StakeHolder updateStakeHolder=stakeHolderRepository.save(stakeHolderData);
-		return ResponseEntity.ok().body(updateStakeHolder);
+		return stakeHolderRepository.save(stakeHolderData);
 	}
 	
 	/*delete a stakeHolder*/
-	public StakeHolder deleteStakeHolder(Long stakeHolderId) {
-		StakeHolder emp = stakeHolderRepository.findOne(stakeHolderId);
+	public boolean deleteStakeHolder(Long stakeHolderId) {
+		if(stakeHolderRepository.findOne(stakeHolderId)==null) {
+			return false;
+		}
 		stakeHolderRepository.delete(stakeHolderId);
-		return emp;
+		return true;
 	}
+	
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,18 +37,29 @@ public class CustomerController {
 	}
 	
 	@PostMapping("/customers")
-	public Customer addCustomer(@RequestBody Customer customer) {
-		return customerService.addCustomer(customer);
+	public ResponseEntity<Customer> addCustomer(@RequestBody Customer customer) {
+		Customer cust = customerService.addCustomer(customer);
+		if(cust==null) {
+			return new ResponseEntity<Customer>(cust, HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<Customer>(cust,HttpStatus.OK);
 	}
 	
 	@PutMapping("/customers/{id}")
-	public ResponseEntity<Customer> updateCustomer(@Valid @RequestBody Customer customer, @PathVariable(value="id") Long id) {
-		return customerService.updateCustomer(customer, id);
+	public ResponseEntity<Void> updateCustomer(@Valid @RequestBody Customer customer, @PathVariable(value="id") Long id) {
+		
+		if(customerService.updateCustomer(customer, id)==null) {
+			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/customers/{id}")
-	public Customer deleteCustomer(@PathVariable long id) {
-		return customerService.deleteCustomer(id);
+	public ResponseEntity<Void> deleteCustomer(@PathVariable long id) {
+		if(customerService.deleteCustomer(id) ==false) {
+			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	
 }

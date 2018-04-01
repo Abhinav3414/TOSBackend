@@ -5,14 +5,15 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tos.model.Skill;
@@ -36,18 +37,28 @@ public class SkillController {
 	}
 	
 	@PostMapping("/skills")
-	public Skill addSkill(@RequestBody Skill skill) {
-		return skillService.addSkill(skill);
+	public ResponseEntity<Skill> addSkill(@RequestBody Skill skill) {
+		Skill empSkill = skillService.addSkill(skill);
+		if(empSkill==null) {
+			return new ResponseEntity<Skill>(empSkill, HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<Skill>(empSkill, HttpStatus.OK);
 	}
 	
-	@RequestMapping(method=RequestMethod.PUT, value ="/skills/{id}" )
-	public ResponseEntity<Skill> updateSkill(@Valid @RequestBody Skill skill, @PathVariable Long id) {
-		return skillService.updateSkill(skill, id);
+	@PutMapping("/skills/{id}")
+	public ResponseEntity<Void> updateSkill(@Valid @RequestBody Skill skill, @PathVariable Long id) {
+		if(skillService.updateSkill(skill, id)==null) {
+			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
 	}
 	
 	@DeleteMapping("/skills/{id}")
-	public Skill deleteSkill(@PathVariable long id) {
-		return skillService.deleteSkill(id);
+	public ResponseEntity<Void> deleteSkill(@PathVariable long id) {
+		if(skillService.deleteSkill(id) ==false) {
+			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
 	}
 	
 }

@@ -22,8 +22,7 @@ public class GoalService {
 	
 	/*to save a goal */
 	public Goal addGoal(Goal goal) {
-		goalRepository.save(goal);
-		return goalRepository.findOne(goal.getId());
+		return goalRepository.save(goal);
 	}
 	
 	/*get a goal by id*/
@@ -32,19 +31,22 @@ public class GoalService {
 	}
 
 	/*to update a goal*/
-	public ResponseEntity<Goal> updateGoal(Goal goalData, long id) {
-		Goal goal=goalRepository.findOne(id);
-		if(goal==null) {
-			return ResponseEntity.notFound().build();
+	public Goal updateGoal(Goal goalData, long id) {
+		if(goalRepository.findOne(id)==null) {
+			return null;
 		}
-		Goal updateGoal=goalRepository.save(goalData);
-		return ResponseEntity.ok().body(updateGoal);
+		return goalRepository.save(goalData);
 	}
 	
 	/*delete a goal*/
-	public Goal deleteGoal(Long goalId) {
-		Goal emp = goalRepository.findOne(goalId);
+	
+	public boolean deleteGoal(Long goalId) {
+		if(goalRepository.findOne(goalId)==null) {
+			return false;
+		}
 		goalRepository.delete(goalId);
-		return emp;
+		return true;
 	}
+	
+	
 }

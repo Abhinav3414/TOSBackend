@@ -22,8 +22,7 @@ public class ProjectRythmService {
 	
 	/*to save a projectRythm */
 	public ProjectRythm addProjectRythm(ProjectRythm projectRythm) {
-		projectRythmRepository.save(projectRythm);
-		return projectRythmRepository.findOne(projectRythm.getId());
+		return projectRythmRepository.save(projectRythm);
 	}
 	
 	/*get a projectRythm by id*/
@@ -32,19 +31,20 @@ public class ProjectRythmService {
 	}
 
 	/*to update a projectRythm*/
-	public ResponseEntity<ProjectRythm> updateProjectRythm(ProjectRythm projectRythmData, long id) {
-		ProjectRythm projectRythm=projectRythmRepository.findOne(id);
-		if(projectRythm==null) {
-			return ResponseEntity.notFound().build();
+	public ProjectRythm updateProjectRythm(ProjectRythm projectRythmData, long id) {
+		if(projectRythmRepository.findOne(id)==null) {
+			return null;
 		}
-		ProjectRythm updateProjectRythm=projectRythmRepository.save(projectRythmData);
-		return ResponseEntity.ok().body(updateProjectRythm);
+		return projectRythmRepository.save(projectRythmData);
 	}
 	
 	/*delete a projectRythm*/
-	public ProjectRythm deleteProjectRythm(Long projectRythmId) {
-		ProjectRythm projectRythm = projectRythmRepository.findOne(projectRythmId);
+	public boolean deleteProjectRythm(Long projectRythmId) {
+		if(projectRythmRepository.findOne(projectRythmId)==null) {
+			return false;
+		}
 		projectRythmRepository.delete(projectRythmId);
-		return projectRythm;
+		return true;
 	}
+	
 }

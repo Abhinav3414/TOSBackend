@@ -5,14 +5,15 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tos.model.Feedback;
@@ -36,18 +37,28 @@ public class FeedbackController {
 	}
 	
 	@PostMapping("/feedbacks")
-	public Feedback addFeedback(@RequestBody Feedback feedback) {
-		return feedbackService.addFeedback(feedback);
+	public ResponseEntity<Feedback> addFeedback(@RequestBody Feedback feedback) {
+		Feedback feed = feedbackService.addFeedback(feedback);
+		if(feed==null) {
+			return new ResponseEntity<Feedback>(feed, HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<Feedback>(feed, HttpStatus.OK);
 	}
 	
-	@RequestMapping(method=RequestMethod.PUT, value ="/feedbacks/{id}" )
-	public ResponseEntity<Feedback> updateFeedback(@Valid @RequestBody Feedback feedback, @PathVariable Long id) {
-		return feedbackService.updateFeedback(feedback, id);
+	@PutMapping("/feedbacks/{id}")
+	public ResponseEntity<Void> updateFeedback(@Valid @RequestBody Feedback feedback, @PathVariable Long id) {
+		if(feedbackService.updateFeedback(feedback, id)==null) {
+			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
 	}
 	
 	@DeleteMapping("/feedbacks/{id}")
-	public Feedback deleteSkill(@PathVariable long id) {
-		return feedbackService.deleteFeedback(id);
+	public ResponseEntity<Void> deleteFeedback(@PathVariable long id) {
+		if(feedbackService.deleteFeedback(id)==false) {
+			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
 	}
 	
 }

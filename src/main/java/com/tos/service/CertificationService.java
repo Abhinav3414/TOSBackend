@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.tos.model.Certification;
+import com.tos.model.Customer;
 import com.tos.repository.CertificationRepository;
 
 @Service
@@ -22,8 +23,7 @@ public class CertificationService {
 	
 	/*to save a certification*/
 	public Certification addCertification(Certification certification) {
-		certificationRepository.save(certification);
-		return certificationRepository.findOne(certification.getId());
+		return certificationRepository.save(certification);
 	}
 	
 	/*get a certification by id*/
@@ -32,19 +32,19 @@ public class CertificationService {
 	}
 
 	/*to update a certification*/
-	public ResponseEntity<Certification> updateCertification(Certification certification, long id) {
-		Certification certi=certificationRepository.findOne(id);
-		if(certi==null) {
-			return ResponseEntity.notFound().build();
+	public Certification updateCertification(Certification certification, long id) {
+		if(certificationRepository.findOne(id)==null) {
+			return null;
 		}
-		Certification updateCertification=certificationRepository.save(certification);
-		return ResponseEntity.ok().body(updateCertification);
+		return certificationRepository.save(certification);
 	}
 	
 	/*delete a certification*/
-	public Certification deleteCertification(Long certificationId) {
-		Certification emp = certificationRepository.findOne(certificationId);
+	public boolean deleteCertification(Long certificationId) {
+		if(certificationRepository.findOne(certificationId)==null) {
+			return false;
+		}
 		certificationRepository.delete(certificationId);
-		return emp;
+		return true;
 	}
 }
