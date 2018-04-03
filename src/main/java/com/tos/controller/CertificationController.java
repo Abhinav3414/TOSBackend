@@ -50,7 +50,7 @@ public class CertificationController {
 		if(certificationService.updateCertification(certification, id)==null) {
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
+		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/certifications/{id}")
@@ -58,7 +58,7 @@ public class CertificationController {
 		if(certificationService.deleteCertification(id) ==false) {
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
+		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	
 }

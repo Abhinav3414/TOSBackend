@@ -50,7 +50,7 @@ public class ProjectRythmController {
 		if(projectRythmService.updateProjectRythm(projectRythm, id) ==null) {
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
+		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/projectrythms/{id}")
@@ -58,7 +58,7 @@ public class ProjectRythmController {
 		if(projectRythmService.deleteProjectRythm(id)==false) {
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
+		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	
 }

@@ -50,7 +50,7 @@ public class SkillController {
 		if(skillService.updateSkill(skill, id)==null) {
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
+		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/skills/{id}")
@@ -58,7 +58,7 @@ public class SkillController {
 		if(skillService.deleteSkill(id) ==false) {
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
+		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	
 }

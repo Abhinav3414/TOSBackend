@@ -50,7 +50,7 @@ public class StakeHolderController {
 		if(stakeHolderService.updateStakeHolder(stakeHolder, id)==null) {
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
+		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/stakeholders/{id}")
@@ -58,7 +58,7 @@ public class StakeHolderController {
 		if(stakeHolderService.deleteStakeHolder(id) ==false) {
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
+		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	
 }

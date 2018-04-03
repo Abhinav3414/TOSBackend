@@ -27,7 +27,7 @@ public class TeamMember {
 	
 	@NotNull
 	@Column(name="teammember_team_id")
-	private Long team_Id;
+	private Long teamId;
 	
 	private String role;
 	
@@ -53,11 +53,11 @@ public class TeamMember {
 	}
 
 	public Long getTeam_Id() {
-		return team_Id;
+		return teamId;
 	}
 
 	public void setTeam_Id(Long team_Id) {
-		this.team_Id = team_Id;
+		this.teamId = team_Id;
 	}
 
 	public String getRole() {

@@ -50,7 +50,7 @@ public class TravelController {
 		if(travelService.updateTravel(travel, id)==null) {
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
+		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/travels/{id}")
@@ -58,7 +58,7 @@ public class TravelController {
 		if(travelService.deleteTravel(id)==false) {
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
+		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	
 }

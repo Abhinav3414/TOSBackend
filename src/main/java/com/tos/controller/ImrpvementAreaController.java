@@ -50,7 +50,7 @@ public class ImrpvementAreaController {
 		if(improvementAreaService.updateImprovementArea(improvementArea, id) ==null) {
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
+		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/improvementareas/{id}")
@@ -58,7 +58,7 @@ public class ImrpvementAreaController {
 		if(improvementAreaService.deleteImprovementArea(id)==false) {
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
+		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	
 }

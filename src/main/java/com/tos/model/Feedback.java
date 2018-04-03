@@ -31,7 +31,7 @@ public class Feedback {
 	@Column(name="feedback_emp_id")
 	private Long employeeId;
 	
-	private Long receivedFrom;
+	private String receivedFrom;
 	
 	private String actionsTaken;
 	
@@ -66,11 +66,11 @@ public class Feedback {
 		this.employeeId = employeeId;
 	}
 
-	public Long getReceivedFrom() {
+	public String getReceivedFrom() {
 		return receivedFrom;
 	}
 
-	public void setReceivedFrom(Long receivedFrom) {
+	public void setReceivedFrom(String receivedFrom) {
 		this.receivedFrom = receivedFrom;
 	}
 

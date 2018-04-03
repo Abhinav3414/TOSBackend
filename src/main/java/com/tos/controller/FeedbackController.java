@@ -50,7 +50,7 @@ public class FeedbackController {
 		if(feedbackService.updateFeedback(feedback, id)==null) {
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
+		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/feedbacks/{id}")
@@ -58,7 +58,7 @@ public class FeedbackController {
 		if(feedbackService.deleteFeedback(id)==false) {
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
+		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	
 }

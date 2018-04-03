@@ -40,9 +40,9 @@ public class TeamMemberController {
 	public ResponseEntity<TeamMember> addTeamMember(@RequestBody TeamMember teamMember) {
 		TeamMember tMember = teamMemberService.addTeamMember(teamMember);
 		if(tMember==null) {
-			return new ResponseEntity<TeamMember>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<TeamMember>(tMember, HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<TeamMember>(HttpStatus.OK);
+		return new ResponseEntity<TeamMember>(tMember, HttpStatus.OK);
 	}
 	
 	@PutMapping("/teammembers/{id}")
@@ -50,7 +50,7 @@ public class TeamMemberController {
 		if(teamMemberService.updateTeamMember(teamMember, id)==null) {
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
+		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/teammembers/{id}")
@@ -58,7 +58,7 @@ public class TeamMemberController {
 		if(teamMemberService.deleteTeamMember(id)==false) {
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
+		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	
 }

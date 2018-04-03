@@ -16,6 +16,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.Cascade;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -45,7 +46,7 @@ public class Customer {
 	@JoinColumn(name = "stakeholder_cust_id")
 	private List<StakeHolder> stakeHolders;
 	
-	@OneToMany(cascade = CascadeType.ALL, targetEntity= Team.class)
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, targetEntity= Team.class)
 	@JoinColumn(name = "team_cust_id")
 	private List<Team> teams;
 	
