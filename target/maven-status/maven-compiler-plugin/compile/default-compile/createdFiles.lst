@@ -10,6 +10,7 @@ com\tos\controller\CustomerController.class
 com\tos\controller\GoalController.class
 com\tos\controller\ImrpvementAreaController.class
 com\tos\controller\TeamMemberController.class
+com\tos\controller\TravelController.class
 com\tos\model\ImprovementArea.class
 com\tos\repository\StakeHolderRepository.class
 com\tos\service\AddressService.class
@@ -21,6 +22,7 @@ com\tos\service\ActionService.class
 com\tos\model\Goal.class
 com\tos\controller\TeamController.class
 com\tos\repository\FeedbackRepository.class
+com\tos\model\Travel.class
 com\tos\controller\ProjectRythmController.class
 com\tos\repository\EmployeeRepository.class
 com\tos\model\ProjectRythm.class
@@ -32,6 +34,7 @@ com\tos\service\ImprovementAreaService.class
 com\tos\service\TrainingService.class
 com\tos\repository\TrainingRepository.class
 com\tos\repository\ActionRepository.class
+com\tos\service\TravelService.class
 com\tos\controller\CertificationController.class
 com\tos\repository\TeamMemberRepository.class
 com\tos\TosApplication.class
@@ -40,6 +43,7 @@ com\tos\controller\SkillController.class
 com\tos\repository\TeamRepository.class
 com\tos\service\GoalService.class
 com\tos\controller\StakeHolderController.class
+com\tos\repository\TravelRepository.class
 com\tos\controller\AddressController.class
 com\tos\controller\EmployeeController.class
 com\tos\model\Address.class

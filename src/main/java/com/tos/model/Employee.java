@@ -29,7 +29,7 @@ public class Employee {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	private String name;
-	private String joiningDate;
+	private Date joiningDate;
 	private String yearsOfExperience;
 	private String responsibilities;
 	
@@ -92,11 +92,11 @@ public class Employee {
 		return this;
 	}
 
-	public String getJoiningDate() {
+	public Date getJoiningDate() {
 		return joiningDate;
 	}
 
-	public Employee setJoiningDate(String joiningDate) {
+	public Employee setJoiningDate(Date joiningDate) {
 		this.joiningDate = joiningDate;
 		return this;
 	}

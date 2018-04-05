@@ -35,9 +35,9 @@ public class Travel {
 	
 	private String travellingTo;
 	
-	private String travellingFromDate;
+	private Date travellingFromDate;
 	
-	private String travellingToDate;
+	private Date travellingToDate;
 	
 	private String purpose;
 	
@@ -88,19 +88,19 @@ public class Travel {
 		this.travellingTo = travellingTo;
 	}
 
-	public String getTravellingFromDate() {
+	public Date getTravellingFromDate() {
 		return travellingFromDate;
 	}
 
-	public void setTravellingFromDate(String travellingFromDate) {
+	public void setTravellingFromDate(Date travellingFromDate) {
 		this.travellingFromDate = travellingFromDate;
 	}
 
-	public String getTravellingToDate() {
+	public Date getTravellingToDate() {
 		return travellingToDate;
 	}
 
-	public void setTravellingToDate(String travellingToDate) {
+	public void setTravellingToDate(Date travellingToDate) {
 		this.travellingToDate = travellingToDate;
 	}
 
