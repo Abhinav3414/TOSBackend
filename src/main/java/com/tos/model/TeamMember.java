@@ -31,7 +31,7 @@ public class TeamMember {
 	
 	private String role;
 	
-	private String productivity;
+	private String velocity;
 	
 	@NotNull
 	@Column(name="teammember_emp_id")
@@ -69,11 +69,11 @@ public class TeamMember {
 	}
 
 	public String getProductivity() {
-		return productivity;
+		return velocity;
 	}
 
 	public void setProductivity(String productivity) {
-		this.productivity = productivity;
+		this.velocity = productivity;
 	}
 
 	public Long getEmployeeId() {
