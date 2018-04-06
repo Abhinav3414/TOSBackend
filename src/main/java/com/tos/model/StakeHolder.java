@@ -37,8 +37,6 @@ public class StakeHolder {
 	
 	private String phoneNo;
 	
-	private String raci;
-	
 	@Temporal(TemporalType.TIMESTAMP)
 	@LastModifiedDate
 	private Date createdAt;
@@ -92,14 +90,6 @@ public class StakeHolder {
 
 	public void setPhoneNo(String phoneNo) {
 		this.phoneNo = phoneNo;
-	}
-
-	public String getRaci() {
-		return raci;
-	}
-
-	public void setRaci(String raci) {
-		this.raci = raci;
 	}
 
 	public Date getCreatedAt() {
