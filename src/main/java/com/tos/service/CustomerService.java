@@ -9,11 +9,13 @@ import com.tos.model.Address;
 import com.tos.model.Customer;
 import com.tos.model.Goal;
 import com.tos.model.StakeHolder;
+import com.tos.model.Team;
 import com.tos.model.Travel;
 import com.tos.repository.AddressRepository;
 import com.tos.repository.CustomerRepository;
 import com.tos.repository.GoalRepository;
 import com.tos.repository.StakeHolderRepository;
+import com.tos.repository.TeamRepository;
 import com.tos.repository.TravelRepository;
 
 @Service
@@ -27,6 +29,9 @@ public class CustomerService {
 	
 	@Autowired
 	private GoalRepository goalRepository;
+	
+	@Autowired
+	private TeamRepository teamRepository;
 	
 	@Autowired
 	private StakeHolderRepository stakeHolderRepository;
@@ -65,6 +70,7 @@ public class CustomerService {
 		}
 		List<Address> customerAddresses = addressRepository.getAddressByCustomerId(custId);
 		List<Goal> customerGoals = goalRepository.getGoalByCustomerId(custId);
+		List<Team> customerTeams = teamRepository.getTeamByCustomerId(custId);
 		List<StakeHolder> customerStakeHolders = stakeHolderRepository.getStakeHolderByCustomerId(custId);
 		List<Travel> customerTravels = travelRepository.getTravelByCustomerId(custId);
 
@@ -73,6 +79,9 @@ public class CustomerService {
 		}
 		for (Goal goal : customerGoals) {
 			goalRepository.delete(goal.getId());
+		}
+		for (Team team : customerTeams) {
+			teamRepository.delete(team.getId());
 		}
 		for (StakeHolder stakeHolder : customerStakeHolders) {
 			stakeHolderRepository.delete(stakeHolder.getId());
