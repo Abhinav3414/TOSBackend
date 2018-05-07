@@ -37,6 +37,8 @@ public class StakeHolder {
 	
 	private String phoneNo;
 	
+	private boolean isContactPerson;
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	@LastModifiedDate
 	private Date createdAt;
@@ -90,6 +92,14 @@ public class StakeHolder {
 
 	public void setPhoneNo(String phoneNo) {
 		this.phoneNo = phoneNo;
+	}
+
+	public boolean isContactPerson() {
+		return isContactPerson;
+	}
+
+	public void setContactPerson(boolean isContactPerson) {
+		this.isContactPerson = isContactPerson;
 	}
 
 	public Date getCreatedAt() {

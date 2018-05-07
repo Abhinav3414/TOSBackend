@@ -1,12 +1,10 @@
 package com.tos.service;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.tos.model.Role;
 import com.tos.model.User;
 import com.tos.repository.UserRepository;
 
@@ -23,8 +21,8 @@ public class UserService {
 	
 	/*to save a user */
 	public User addUser(User user) {
-		User tempUser = new User(user.getUsername(), user.getEmail(), user.getPassword(),Arrays.asList(new Role("USER"), new Role("ACTUATOR")));
-		return userRepository.save(tempUser);
+		//User tempUser = new User(user.getUsername(), user.getEmail(), user.getPassword(),Arrays.asList(new Role("USER"), new Role("ACTUATOR")));
+		return userRepository.save(user);
 	}
 	
 	/*get a user by id*/

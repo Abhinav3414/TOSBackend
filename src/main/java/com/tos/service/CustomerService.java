@@ -5,13 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.tos.model.Address;
 import com.tos.model.Customer;
 import com.tos.model.Goal;
 import com.tos.model.StakeHolder;
 import com.tos.model.Team;
 import com.tos.model.Travel;
-import com.tos.repository.AddressRepository;
 import com.tos.repository.CustomerRepository;
 import com.tos.repository.GoalRepository;
 import com.tos.repository.StakeHolderRepository;
@@ -23,9 +21,6 @@ public class CustomerService {
 	
 	@Autowired
 	private CustomerRepository customerRepository;
-	
-	@Autowired
-	private AddressRepository addressRepository;
 	
 	@Autowired
 	private GoalRepository goalRepository;
@@ -68,15 +63,11 @@ public class CustomerService {
 		if(customerRepository.findOne(custId)==null) {
 			return false;
 		}
-		List<Address> customerAddresses = addressRepository.getAddressByCustomerId(custId);
 		List<Goal> customerGoals = goalRepository.getGoalByCustomerId(custId);
 		List<Team> customerTeams = teamRepository.getTeamByCustomerId(custId);
 		List<StakeHolder> customerStakeHolders = stakeHolderRepository.getStakeHolderByCustomerId(custId);
 		List<Travel> customerTravels = travelRepository.getTravelByCustomerId(custId);
 
-		for (Address address : customerAddresses) {
-			addressRepository.delete(address.getId());
-		}
 		for (Goal goal : customerGoals) {
 			goalRepository.delete(goal.getId());
 		}

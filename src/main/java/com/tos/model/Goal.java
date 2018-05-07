@@ -35,7 +35,7 @@ public class Goal {
 	
 	private String status;
 	
-	private String notes;
+	private String details;
 	
 	private String signedBy;
 	
@@ -87,11 +87,11 @@ public class Goal {
 	}
 
 	public String getDetails() {
-		return notes;
+		return details;
 	}
 
 	public void setDetails(String details) {
-		this.notes = details;
+		this.details = details;
 	}
 
 	public String getSignedBy() {

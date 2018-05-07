@@ -33,10 +33,8 @@ public class Customer {
 	private String contact;
 	private String contactPerson;
 	private String domain;
-	
-	@OneToMany(cascade = CascadeType.ALL, targetEntity= Address.class)
-	@JoinColumn(name = "address_cust_id")
-	private List<Address> addresses;
+	private String address;
+	private String country;
 	
 	@OneToMany(cascade = CascadeType.ALL, targetEntity= Goal.class)
 	@JoinColumn(name = "goal_cust_id")
@@ -102,12 +100,20 @@ public class Customer {
 		this.domain = domain;
 	}
 
-	public List<Address> getAddresses() {
-		return addresses;
+	public String getAddress() {
+		return address;
 	}
 
-	public void setAddresses(List<Address> addresses) {
-		this.addresses = addresses;
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
 	}
 
 	public List<Goal> getGoals() {

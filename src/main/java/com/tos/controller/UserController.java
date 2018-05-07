@@ -20,7 +20,7 @@ import com.tos.model.User;
 import com.tos.service.UserService;
 
 @RestController
-@RequestMapping("/tos")
+@RequestMapping("/tosuser")
 public class UserController {
 	
 	@Autowired
