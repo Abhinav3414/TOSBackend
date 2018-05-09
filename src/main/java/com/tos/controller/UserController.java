@@ -25,6 +25,8 @@ public class UserController {
 	
 	@Autowired
 	private UserService userService;
+	
+	//TODO: Not safe. Delete Get mapping on Users
 
 	@GetMapping("/users")
 	public List<User> getAllUser(){

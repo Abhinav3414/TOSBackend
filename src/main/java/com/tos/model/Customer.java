@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -20,13 +21,13 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity(name = "Customer")
-@Table(name="Customer")
+@Table(name = "customer")
 @EntityListeners(AuditingEntityListener.class)
 public class Customer {
-	
+
 	@Id
-	@Column(name="id")
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
 	private String name;
@@ -35,27 +36,27 @@ public class Customer {
 	private String domain;
 	private String address;
 	private String country;
-	
-	@OneToMany(cascade = CascadeType.ALL, targetEntity= Goal.class)
+
+	@OneToMany(cascade = CascadeType.ALL, targetEntity = Goal.class)
 	@JoinColumn(name = "goal_cust_id")
 	private List<Goal> goals;
-	
-	@OneToMany(cascade = CascadeType.ALL, targetEntity= StakeHolder.class)
+
+	@OneToMany(cascade = CascadeType.ALL, targetEntity = StakeHolder.class)
 	@JoinColumn(name = "stakeholder_cust_id")
 	private List<StakeHolder> stakeHolders;
-	
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, targetEntity= Team.class)
+
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, targetEntity = Team.class)
 	@JoinColumn(name = "team_cust_id")
 	private List<Team> teams;
-	
-	@OneToMany(cascade = CascadeType.ALL, targetEntity= Travel.class)
+
+	@OneToMany(cascade = CascadeType.ALL, targetEntity = Travel.class)
 	@JoinColumn(name = "travel_cust_id")
 	private List<Travel> travels;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	@LastModifiedDate
 	private Date createdAt;
-	
+
 	public Customer() {
 
 	}

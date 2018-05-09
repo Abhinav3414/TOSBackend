@@ -106,6 +106,126 @@ module.exports = "   <h3>Development & Ownership Team</h3>\n   <div class=\" tos
 
 /***/ }),
 
+/***/ "./src/app/align/align.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AlignComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_data_service__ = __webpack_require__("./src/app/services/data.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_utility_service__ = __webpack_require__("./src/app/services/utility.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_animations__ = __webpack_require__("./node_modules/@angular/animations/esm5/animations.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__align__ = __webpack_require__("./src/app/align/align.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+var AlignComponent = /** @class */ (function () {
+    function AlignComponent(dataService, router, route, utilityService) {
+        this.dataService = dataService;
+        this.router = router;
+        this.route = route;
+        this.utilityService = utilityService;
+    }
+    AlignComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        console.log("hi");
+        this.utilityService.currentBreadCrumb.subscribe(function (bread) { return _this.bread = bread; });
+        this.route.params.subscribe(function (params) {
+            _this.customerId = +params['customerId']; // (+) converts string 'id' to a number
+            if (!isNaN(_this.customerId)) {
+                _this.dataService.getEntityData('aligns', _this.customerId)
+                    .then(function (resCustomerData) {
+                    _this.align = resCustomerData;
+                    console.log(_this.align);
+                }, function (err) {
+                    console.log('No Align entity fount for customer');
+                    _this.align = new __WEBPACK_IMPORTED_MODULE_5__align__["a" /* Align */]();
+                    console.log(_this.align);
+                });
+            }
+        });
+    };
+    AlignComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'align',
+            template: __webpack_require__("./src/app/align/align.html"),
+            animations: [
+                Object(__WEBPACK_IMPORTED_MODULE_4__angular_animations__["trigger"])('fade', [
+                    Object(__WEBPACK_IMPORTED_MODULE_4__angular_animations__["state"])('void', Object(__WEBPACK_IMPORTED_MODULE_4__angular_animations__["style"])({ opacity: 0 })),
+                    Object(__WEBPACK_IMPORTED_MODULE_4__angular_animations__["transition"])(':enter, :leave', [
+                        Object(__WEBPACK_IMPORTED_MODULE_4__angular_animations__["animate"])('200ms ease-in')
+                    ])
+                ])
+            ]
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__services_data_service__["a" /* DataService */], __WEBPACK_IMPORTED_MODULE_1__angular_router__["Router"], __WEBPACK_IMPORTED_MODULE_1__angular_router__["ActivatedRoute"],
+            __WEBPACK_IMPORTED_MODULE_3__services_utility_service__["a" /* UtilityService */]])
+    ], AlignComponent);
+    return AlignComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/align/align.html":
+/***/ (function(module, exports) {
+
+module.exports = "<h3>Align for Customer</h3>\n\n<form id=\"formNewEmployee2\" name=\"formNewEmployeeUpdate\"  #customerDataUpdate=\"ngForm\">\n   <mat-form-field >\n      <input matInput placeholder=\"accessToEnvironments\" name=\"accessToEnvironments\" [value]=\"align.accessToEnvironments\" [(ngModel)]=\"align.accessToEnvironments\" ngModel><br>\n   </mat-form-field>\n   <mat-form-field >\n      <input matInput placeholder=\"alignDatabase\" name=\"alignDatabase\" [value]=\"align.alignDatabase\" [(ngModel)]=\"align.alignDatabase\" ngModel>\n   </mat-form-field>\n   <mat-form-field >\n      <input matInput placeholder=\"communicator\" name=\"communicator\" [value]=\"align.communicator\" [(ngModel)]=\"align.communicator\" ngModel>\n   </mat-form-field>\n\n   <mat-form-field >\n      <input matInput placeholder=\"customer_id\" name=\"customer_id\" [value]=\"align.customer_id\" [(ngModel)]=\"align.customer_id\" ngModel>\n   </mat-form-field>\n   <mat-form-field >\n      <input matInput placeholder=\"expectationFromOpd\" name=\"expectationFromOpd\" [value]=\"align.expectationFromOpd\" [(ngModel)]=\"align.expectationFromOpd\" ngModel>\n   </mat-form-field>\n   <mat-form-field >\n      <input matInput placeholder=\"hwRequirement\" name=\"hwRequirement\" [value]=\"align.hwRequirement\" [(ngModel)]=\"align.hwRequirement\" ngModel>\n   </mat-form-field>\n\n   <mat-form-field >\n      <input matInput placeholder=\"intialDiscussionDate\" name=\"intialDiscussionDate\" [value]=\"align.intialDiscussionDate\" [(ngModel)]=\"align.intialDiscussionDate\" ngModel>\n   </mat-form-field>\n   <mat-form-field >\n      <input matInput placeholder=\"ipRestrictionAndAccess\" name=\"ipRestrictionAndAccess\" [value]=\"align.ipRestrictionAndAccess\" [(ngModel)]=\"align.ipRestrictionAndAccess\" ngModel>\n   </mat-form-field>\n   <mat-form-field >\n      <input matInput placeholder=\"mailAccess\" name=\"mailAccess\" [value]=\"align.mailAccess\" [(ngModel)]=\"align.mailAccess\" ngModel>\n   </mat-form-field>\n\n\n   <mat-form-field >\n      <input matInput placeholder=\"operatingEnvironment\" name=\"operatingEnvironment\" [value]=\"align.operatingEnvironment\" [(ngModel)]=\"align.operatingEnvironment\" ngModel>\n   </mat-form-field>\n   <mat-form-field >\n      <input matInput placeholder=\"process\" name=\"process\" [value]=\"align.process\" [(ngModel)]=\"align.process\" ngModel>\n   </mat-form-field>\n   <mat-form-field >\n      <input matInput placeholder=\"processOwnerId\" name=\"processOwnerId\" [value]=\"align.processOwnerId\" [(ngModel)]=\"align.processOwnerId\" ngModel>\n   </mat-form-field>\n   \n</form>\n"
+
+/***/ }),
+
+/***/ "./src/app/align/align.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Align; });
+var Align = /** @class */ (function () {
+    function Align(values) {
+        if (values === void 0) { values = {}; }
+        this.id = '';
+        this.customer_id = '';
+        this.expectationFromOpd = '';
+        this.intialDiscussionDate = '';
+        this.statementOfWork = '';
+        this.processOwnerId = '';
+        this.process = '';
+        this.createdAt = '';
+        this.processTools = '';
+        this.productSolution = '';
+        this.alignDatabase = '';
+        this.operatingEnvironment = '';
+        this.accessToEnvironments = '';
+        this.remoteMachine = '';
+        this.ipRestrictionAndAccess = '';
+        this.vpn = '';
+        this.mailAccess = '';
+        this.communicator = '';
+        this.hwRequirement = '';
+        this.swRequirement = '';
+        this.skillReuirements = '';
+        Object.assign(this, values);
+    }
+    return Align;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/app-routing.module.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -123,12 +243,14 @@ module.exports = "   <h3>Development & Ownership Team</h3>\n   <div class=\" tos
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__content_content_component__ = __webpack_require__("./src/app/content/content.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__login_login_component__ = __webpack_require__("./src/app/login/login.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__home_home_component__ = __webpack_require__("./src/app/home/home.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__align_align_component__ = __webpack_require__("./src/app/align/align.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -152,7 +274,8 @@ var routes = [
     { path: 'view/customer/:id', component: __WEBPACK_IMPORTED_MODULE_5__customer_customer_view_component__["a" /* CustomerViewComponent */] },
     { path: 'view/employees', component: __WEBPACK_IMPORTED_MODULE_2__employee_employee_main_component__["a" /* EmployeeMainComponent */] },
     { path: 'view/employee/:id', component: __WEBPACK_IMPORTED_MODULE_7__employee_employee_view_component__["a" /* EmployeeViewComponent */] },
-    { path: 'view/team/:id', component: __WEBPACK_IMPORTED_MODULE_6__customer_team_team_view_component__["a" /* TeamViewComponent */] }
+    { path: 'view/team/:id', component: __WEBPACK_IMPORTED_MODULE_6__customer_team_team_view_component__["a" /* TeamViewComponent */] },
+    { path: 'view/align/:customerId', component: __WEBPACK_IMPORTED_MODULE_12__align_align_component__["a" /* AlignComponent */] }
 ];
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {
@@ -180,7 +303,7 @@ module.exports = "body > app-root > div > h2\n {\n  font-family: sans-serif;\n  
 /***/ "./src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!--This is app component template.-->\n<div fxFlex=\"15%\" fxHide.lt-md=\"true\"></div>\n<div fxFlex=\"100%\" >\n\n  <!--  <login> </login> -->\n  <content> </content>\n  <!--<footer></footer> -->\n</div>\n<div fxFlex=\"15%\" fxHide.lt-md=\"true\"></div>\n<!--\n<button mat-mini-fab> <mat-icon ><i class=\"material-icons\">home</i></mat-icon> </button>\n-->\n"
+module.exports = "<!--This is app component template.-->\n\n\n  <!--  <login> </login> -->\n  <content> </content>\n  <!--<footer></footer> -->\n\n<!--\n<button mat-mini-fab> <mat-icon ><i class=\"material-icons\">home</i></mat-icon> </button>\n-->\n"
 
 /***/ }),
 
@@ -247,25 +370,26 @@ var AppComponent = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__customer_customer_main_component__ = __webpack_require__("./src/app/customer/customer-main.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__customer_customer_view_component__ = __webpack_require__("./src/app/customer/customer-view.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__customer_customer_dialog_component__ = __webpack_require__("./src/app/customer/customer-dialog.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__customer_goal_goal_dialog_component__ = __webpack_require__("./src/app/customer/goal/goal-dialog.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__customer_team_team_dialog_component__ = __webpack_require__("./src/app/customer/team/team-dialog.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__customer_stakeholder_stakeholder_dialog_component__ = __webpack_require__("./src/app/customer/stakeholder/stakeholder-dialog.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__customer_team_team_view_component__ = __webpack_require__("./src/app/customer/team/team-view.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__customer_team_projectrythm_projectrythm_dialog_component__ = __webpack_require__("./src/app/customer/team/projectrythm/projectrythm-dialog.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__customer_team_teammember_teammember_dialog_component__ = __webpack_require__("./src/app/customer/team/teammember/teammember-dialog.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__customer_travel_travel_dialog_component__ = __webpack_require__("./src/app/customer/travel/travel-dialog.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__employee_skill_skill_dialog_component__ = __webpack_require__("./src/app/employee/skill/skill-dialog.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__employee_certification_certification_dialog_component__ = __webpack_require__("./src/app/employee/certification/certification-dialog.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_35__employee_improvementarea_improvementarea_dialog_component__ = __webpack_require__("./src/app/employee/improvementarea/improvementarea-dialog.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_36__employee_feedback_feedback_dialog_component__ = __webpack_require__("./src/app/employee/feedback/feedback-dialog.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_37__employee_training_training_dialog_component__ = __webpack_require__("./src/app/employee/training/training-dialog.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_38__customer_team_action_action_dialog_component__ = __webpack_require__("./src/app/customer/team/action/action-dialog.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_39__services_data_service__ = __webpack_require__("./src/app/services/data.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_40__services_utility_service__ = __webpack_require__("./src/app/services/utility.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_41__services_auth_service__ = __webpack_require__("./src/app/services/auth.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_42__services_localStorage_service__ = __webpack_require__("./src/app/services/localStorage.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_43__services_url_service__ = __webpack_require__("./src/app/services/url.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_44__Interceptors_auth_interceptor__ = __webpack_require__("./src/app/Interceptors/auth.interceptor.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__align_align_component__ = __webpack_require__("./src/app/align/align.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__customer_goal_goal_dialog_component__ = __webpack_require__("./src/app/customer/goal/goal-dialog.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__customer_team_team_dialog_component__ = __webpack_require__("./src/app/customer/team/team-dialog.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__customer_stakeholder_stakeholder_dialog_component__ = __webpack_require__("./src/app/customer/stakeholder/stakeholder-dialog.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__customer_team_team_view_component__ = __webpack_require__("./src/app/customer/team/team-view.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__customer_team_projectrythm_projectrythm_dialog_component__ = __webpack_require__("./src/app/customer/team/projectrythm/projectrythm-dialog.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__customer_team_teammember_teammember_dialog_component__ = __webpack_require__("./src/app/customer/team/teammember/teammember-dialog.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__customer_travel_travel_dialog_component__ = __webpack_require__("./src/app/customer/travel/travel-dialog.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__employee_skill_skill_dialog_component__ = __webpack_require__("./src/app/employee/skill/skill-dialog.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_35__employee_certification_certification_dialog_component__ = __webpack_require__("./src/app/employee/certification/certification-dialog.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_36__employee_improvementarea_improvementarea_dialog_component__ = __webpack_require__("./src/app/employee/improvementarea/improvementarea-dialog.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_37__employee_feedback_feedback_dialog_component__ = __webpack_require__("./src/app/employee/feedback/feedback-dialog.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_38__employee_training_training_dialog_component__ = __webpack_require__("./src/app/employee/training/training-dialog.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_39__customer_team_action_action_dialog_component__ = __webpack_require__("./src/app/customer/team/action/action-dialog.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_40__services_data_service__ = __webpack_require__("./src/app/services/data.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_41__services_utility_service__ = __webpack_require__("./src/app/services/utility.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_42__services_auth_service__ = __webpack_require__("./src/app/services/auth.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_43__services_localStorage_service__ = __webpack_require__("./src/app/services/localStorage.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_44__services_url_service__ = __webpack_require__("./src/app/services/url.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_45__Interceptors_auth_interceptor__ = __webpack_require__("./src/app/Interceptors/auth.interceptor.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -275,6 +399,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -335,26 +460,27 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_23__customer_customer_main_component__["a" /* CustomerMainComponent */],
                 __WEBPACK_IMPORTED_MODULE_21__employee_employee_view_component__["a" /* EmployeeViewComponent */],
                 __WEBPACK_IMPORTED_MODULE_24__customer_customer_view_component__["a" /* CustomerViewComponent */],
-                __WEBPACK_IMPORTED_MODULE_29__customer_team_team_view_component__["a" /* TeamViewComponent */],
+                __WEBPACK_IMPORTED_MODULE_30__customer_team_team_view_component__["a" /* TeamViewComponent */],
                 __WEBPACK_IMPORTED_MODULE_22__employee_employee_dialog_component__["a" /* EmployeeDialogComponent */],
                 __WEBPACK_IMPORTED_MODULE_25__customer_customer_dialog_component__["a" /* CustomerDialogComponent */],
-                __WEBPACK_IMPORTED_MODULE_28__customer_stakeholder_stakeholder_dialog_component__["a" /* StakeholderDialogComponent */],
-                __WEBPACK_IMPORTED_MODULE_26__customer_goal_goal_dialog_component__["a" /* GoalDialogComponent */],
-                __WEBPACK_IMPORTED_MODULE_27__customer_team_team_dialog_component__["a" /* TeamDialogComponent */],
-                __WEBPACK_IMPORTED_MODULE_30__customer_team_projectrythm_projectrythm_dialog_component__["a" /* ProjectRythmDialogComponent */],
-                __WEBPACK_IMPORTED_MODULE_38__customer_team_action_action_dialog_component__["a" /* ActionDialogComponent */],
-                __WEBPACK_IMPORTED_MODULE_31__customer_team_teammember_teammember_dialog_component__["a" /* TeamMemberDialogComponent */],
-                __WEBPACK_IMPORTED_MODULE_32__customer_travel_travel_dialog_component__["a" /* TravelDialogComponent */],
-                __WEBPACK_IMPORTED_MODULE_33__employee_skill_skill_dialog_component__["a" /* SkillDialogComponent */],
-                __WEBPACK_IMPORTED_MODULE_34__employee_certification_certification_dialog_component__["a" /* CertificationDialogComponent */],
-                __WEBPACK_IMPORTED_MODULE_37__employee_training_training_dialog_component__["a" /* TrainingDialogComponent */],
-                __WEBPACK_IMPORTED_MODULE_35__employee_improvementarea_improvementarea_dialog_component__["a" /* ImprovementAreaDialogComponent */],
-                __WEBPACK_IMPORTED_MODULE_36__employee_feedback_feedback_dialog_component__["a" /* FeedbackDialogComponent */],
+                __WEBPACK_IMPORTED_MODULE_29__customer_stakeholder_stakeholder_dialog_component__["a" /* StakeholderDialogComponent */],
+                __WEBPACK_IMPORTED_MODULE_27__customer_goal_goal_dialog_component__["a" /* GoalDialogComponent */],
+                __WEBPACK_IMPORTED_MODULE_28__customer_team_team_dialog_component__["a" /* TeamDialogComponent */],
+                __WEBPACK_IMPORTED_MODULE_31__customer_team_projectrythm_projectrythm_dialog_component__["a" /* ProjectRythmDialogComponent */],
+                __WEBPACK_IMPORTED_MODULE_39__customer_team_action_action_dialog_component__["a" /* ActionDialogComponent */],
+                __WEBPACK_IMPORTED_MODULE_32__customer_team_teammember_teammember_dialog_component__["a" /* TeamMemberDialogComponent */],
+                __WEBPACK_IMPORTED_MODULE_33__customer_travel_travel_dialog_component__["a" /* TravelDialogComponent */],
+                __WEBPACK_IMPORTED_MODULE_34__employee_skill_skill_dialog_component__["a" /* SkillDialogComponent */],
+                __WEBPACK_IMPORTED_MODULE_35__employee_certification_certification_dialog_component__["a" /* CertificationDialogComponent */],
+                __WEBPACK_IMPORTED_MODULE_38__employee_training_training_dialog_component__["a" /* TrainingDialogComponent */],
+                __WEBPACK_IMPORTED_MODULE_36__employee_improvementarea_improvementarea_dialog_component__["a" /* ImprovementAreaDialogComponent */],
+                __WEBPACK_IMPORTED_MODULE_37__employee_feedback_feedback_dialog_component__["a" /* FeedbackDialogComponent */],
                 __WEBPACK_IMPORTED_MODULE_18__profile_profile_component__["a" /* ProfileComponent */],
                 __WEBPACK_IMPORTED_MODULE_13__footer_footer_component__["a" /* FooterComponent */],
                 __WEBPACK_IMPORTED_MODULE_14__content_content_component__["a" /* ContentComponent */],
                 __WEBPACK_IMPORTED_MODULE_17__menu_breadcrumb_component__["a" /* BreadcrumbComponent */],
-                __WEBPACK_IMPORTED_MODULE_19__home_home_component__["a" /* HomeComponent */]
+                __WEBPACK_IMPORTED_MODULE_19__home_home_component__["a" /* HomeComponent */],
+                __WEBPACK_IMPORTED_MODULE_26__align_align_component__["a" /* AlignComponent */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__["BrowserModule"],
@@ -370,19 +496,19 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_7_angular_svg_icon__["a" /* AngularSvgIconModule */]
             ],
             exports: [],
-            providers: [__WEBPACK_IMPORTED_MODULE_39__services_data_service__["a" /* DataService */], __WEBPACK_IMPORTED_MODULE_40__services_utility_service__["a" /* UtilityService */], __WEBPACK_IMPORTED_MODULE_41__services_auth_service__["a" /* AuthService */], __WEBPACK_IMPORTED_MODULE_42__services_localStorage_service__["a" /* LocalStorageService */], __WEBPACK_IMPORTED_MODULE_43__services_url_service__["a" /* UrlService */],
+            providers: [__WEBPACK_IMPORTED_MODULE_40__services_data_service__["a" /* DataService */], __WEBPACK_IMPORTED_MODULE_41__services_utility_service__["a" /* UtilityService */], __WEBPACK_IMPORTED_MODULE_42__services_auth_service__["a" /* AuthService */], __WEBPACK_IMPORTED_MODULE_43__services_localStorage_service__["a" /* LocalStorageService */], __WEBPACK_IMPORTED_MODULE_44__services_url_service__["a" /* UrlService */],
                 {
                     provide: __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["a" /* HTTP_INTERCEPTORS */],
-                    useClass: __WEBPACK_IMPORTED_MODULE_44__Interceptors_auth_interceptor__["a" /* AuthInterceptor */],
+                    useClass: __WEBPACK_IMPORTED_MODULE_45__Interceptors_auth_interceptor__["a" /* AuthInterceptor */],
                     multi: true
                 }
                 /*{ provide: LocationStrategy, useClass: HashLocationStrategy },*/
             ],
             entryComponents: [
-                __WEBPACK_IMPORTED_MODULE_22__employee_employee_dialog_component__["a" /* EmployeeDialogComponent */], __WEBPACK_IMPORTED_MODULE_25__customer_customer_dialog_component__["a" /* CustomerDialogComponent */], __WEBPACK_IMPORTED_MODULE_28__customer_stakeholder_stakeholder_dialog_component__["a" /* StakeholderDialogComponent */],
-                __WEBPACK_IMPORTED_MODULE_26__customer_goal_goal_dialog_component__["a" /* GoalDialogComponent */], __WEBPACK_IMPORTED_MODULE_27__customer_team_team_dialog_component__["a" /* TeamDialogComponent */], __WEBPACK_IMPORTED_MODULE_30__customer_team_projectrythm_projectrythm_dialog_component__["a" /* ProjectRythmDialogComponent */], __WEBPACK_IMPORTED_MODULE_38__customer_team_action_action_dialog_component__["a" /* ActionDialogComponent */],
-                __WEBPACK_IMPORTED_MODULE_31__customer_team_teammember_teammember_dialog_component__["a" /* TeamMemberDialogComponent */], __WEBPACK_IMPORTED_MODULE_32__customer_travel_travel_dialog_component__["a" /* TravelDialogComponent */], __WEBPACK_IMPORTED_MODULE_33__employee_skill_skill_dialog_component__["a" /* SkillDialogComponent */], __WEBPACK_IMPORTED_MODULE_34__employee_certification_certification_dialog_component__["a" /* CertificationDialogComponent */],
-                __WEBPACK_IMPORTED_MODULE_37__employee_training_training_dialog_component__["a" /* TrainingDialogComponent */], __WEBPACK_IMPORTED_MODULE_35__employee_improvementarea_improvementarea_dialog_component__["a" /* ImprovementAreaDialogComponent */], __WEBPACK_IMPORTED_MODULE_36__employee_feedback_feedback_dialog_component__["a" /* FeedbackDialogComponent */]
+                __WEBPACK_IMPORTED_MODULE_22__employee_employee_dialog_component__["a" /* EmployeeDialogComponent */], __WEBPACK_IMPORTED_MODULE_25__customer_customer_dialog_component__["a" /* CustomerDialogComponent */], __WEBPACK_IMPORTED_MODULE_29__customer_stakeholder_stakeholder_dialog_component__["a" /* StakeholderDialogComponent */],
+                __WEBPACK_IMPORTED_MODULE_27__customer_goal_goal_dialog_component__["a" /* GoalDialogComponent */], __WEBPACK_IMPORTED_MODULE_28__customer_team_team_dialog_component__["a" /* TeamDialogComponent */], __WEBPACK_IMPORTED_MODULE_31__customer_team_projectrythm_projectrythm_dialog_component__["a" /* ProjectRythmDialogComponent */], __WEBPACK_IMPORTED_MODULE_39__customer_team_action_action_dialog_component__["a" /* ActionDialogComponent */],
+                __WEBPACK_IMPORTED_MODULE_32__customer_team_teammember_teammember_dialog_component__["a" /* TeamMemberDialogComponent */], __WEBPACK_IMPORTED_MODULE_33__customer_travel_travel_dialog_component__["a" /* TravelDialogComponent */], __WEBPACK_IMPORTED_MODULE_34__employee_skill_skill_dialog_component__["a" /* SkillDialogComponent */], __WEBPACK_IMPORTED_MODULE_35__employee_certification_certification_dialog_component__["a" /* CertificationDialogComponent */],
+                __WEBPACK_IMPORTED_MODULE_38__employee_training_training_dialog_component__["a" /* TrainingDialogComponent */], __WEBPACK_IMPORTED_MODULE_36__employee_improvementarea_improvementarea_dialog_component__["a" /* ImprovementAreaDialogComponent */], __WEBPACK_IMPORTED_MODULE_37__employee_feedback_feedback_dialog_component__["a" /* FeedbackDialogComponent */]
             ],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_11__app_component__["a" /* AppComponent */]]
         }),
@@ -453,7 +579,7 @@ var ContentComponent = /** @class */ (function () {
 /***/ "./src/app/content/content.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div><menu *ngIf=\"tokenSub.length > 0 \"></menu>\r\n</div>\r\n<div id=\"content\" class=\"tos-router-container\">\r\n  <router-outlet ></router-outlet>\r\n</div>\r\n"
+module.exports = "<div class=\"tos-menu-style\">\r\n   <div fxFlex=\"15%\" fxHide.lt-md=\"true\"></div>\r\n   <div fxFlex=\"100%\" >\r\n      <menu *ngIf=\"tokenSub.length > 0 \"></menu>\r\n   </div>\r\n   <div fxFlex=\"15%\" fxHide.lt-md=\"true\"></div>\r\n</div>\r\n\r\n<div class=\"tos-body-style\">\r\n<div fxFlex=\"15%\" fxHide.lt-md=\"true\"></div>\r\n<div fxFlex=\"100%\" >\r\n   <div id=\"content\" class=\"tos-router-container\">\r\n      <router-outlet ></router-outlet>\r\n   </div>\r\n</div>\r\n<div fxFlex=\"15%\" fxHide.lt-md=\"true\"></div>\r\n<div>\r\n"
 
 /***/ }),
 
@@ -564,7 +690,7 @@ var CustomerDialogComponent = /** @class */ (function () {
 /***/ "./src/app/customer/customer-dialog.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"  data.customer!==undefined\" >\r\n   <h2 *ngIf=\"data.customer.id === ''\" mat-dialog-title>Add Customer</h2>\r\n   <h2   *ngIf=\"data.customer.id !== ''\" mat-dialog-title>Update Customer</h2>\r\n   <mat-dialog-content>\r\n      <form id=\"formNewEmployee2\" name=\"formNewEmployeeUpdate\"  #customerDataUpdate=\"ngForm\">\r\n         <mat-form-field >\r\n            <input matInput placeholder=\"Name\" name=\"name\" [value]=\"data.customer.name\" [(ngModel)]=\"data.customer.name\" ngModel><br>\r\n         </mat-form-field>\r\n         <br>\r\n         <mat-form-field >\r\n            <input matInput placeholder=\"Contact No.\" name=\"contact\" [value]=\"data.customer.contact\" [(ngModel)]=\"data.customer.contact\" ngModel>\r\n         </mat-form-field>\r\n         <br>\r\n         <mat-form-field >\r\n            <input matInput placeholder=\"Domain\" name=\"domain\" [value]=\"data.customer.domain\" [(ngModel)]=\"data.customer.domain\" ngModel>\r\n         </mat-form-field>\r\n         <br>\r\n         <mat-form-field >\r\n            <textarea matInput placeholder=\"Address\" rows=\"3\" name=\"address\" [value]=\"data.customer.address\" [(ngModel)]=\"data.customer.address\" ngModel>\r\n            </textarea>\r\n         </mat-form-field>\r\n         <br>\r\n         <mat-form-field >\r\n            <input type=\"text\"  name=\"country\"  placeholder=\"Country\" aria-label=\"country\" matInput [formControl]=\"data.myControl\"\r\n            [(ngModel)]=\"data.customer.country\"\r\n            [matAutocomplete]=\"auto\">\r\n            <mat-autocomplete #auto=\"matAutocomplete\">\r\n               <mat-option *ngFor=\"let country of data.filteredCountries | async\" [value]=\"country\">\r\n               {{ country }}\r\n               </mat-option>\r\n            </mat-autocomplete>\r\n         </mat-form-field>\r\n         <br>\r\n      </form>\r\n   </mat-dialog-content>\r\n   <mat-dialog-actions>\r\n      <button mat-raised-button class=\"tos-primary-button\" [mat-dialog-close]=data.customer *ngIf=\"data.customer.id !== ''\">Update</button>\r\n      <button mat-raised-button class=\"tos-primary-button\" [mat-dialog-close]=data.customer *ngIf=\"data.customer.id === ''\">Add</button>\r\n      <button mat-button mat-dialog-close=\"dialogDismissed\" disableRipple=\"true\" class=\"tos-button\">Cancel</button>\r\n   </mat-dialog-actions>\r\n</div>\r\n"
+module.exports = "<div *ngIf=\"  data.customer!==undefined\" >\r\n   <h2 *ngIf=\"data.customer.id === ''\" mat-dialog-title>Add Customer</h2>\r\n   <h2   *ngIf=\"data.customer.id !== ''\" mat-dialog-title>Update Customer</h2>\r\n   <mat-dialog-content>\r\n      <form id=\"formNewEmployee2\" name=\"formNewEmployeeUpdate\"  #customerDataUpdate=\"ngForm\">\r\n         <mat-form-field >\r\n            <input matInput placeholder=\"Name\" name=\"name\" [value]=\"data.customer.name\" [(ngModel)]=\"data.customer.name\" ngModel><br>\r\n         </mat-form-field>\r\n         <br>\r\n         <mat-form-field >\r\n            <input matInput placeholder=\"Contact No.\" name=\"contact\" [value]=\"data.customer.contact\" [(ngModel)]=\"data.customer.contact\" ngModel>\r\n         </mat-form-field>\r\n         <br>\r\n         <mat-form-field >\r\n            <input matInput placeholder=\"Domain\" name=\"domain\" [value]=\"data.customer.domain\" [(ngModel)]=\"data.customer.domain\" ngModel>\r\n         </mat-form-field>\r\n         <br>\r\n         <mat-form-field >\r\n            <input type=\"text\"  name=\"country\"  placeholder=\"Country\" aria-label=\"country\" matInput [formControl]=\"data.myControl\"\r\n            [(ngModel)]=\"data.customer.country\"\r\n            [matAutocomplete]=\"auto\">\r\n            <mat-autocomplete #auto=\"matAutocomplete\">\r\n               <mat-option *ngFor=\"let country of data.filteredCountries | async\" [value]=\"country\">\r\n               {{ country }}\r\n               </mat-option>\r\n            </mat-autocomplete>\r\n         </mat-form-field>\r\n         <br>\r\n         <mat-form-field >\r\n            <textarea matInput placeholder=\"Address\" rows=\"3\" name=\"address\" [value]=\"data.customer.address\" [(ngModel)]=\"data.customer.address\" ngModel>\r\n            </textarea>\r\n         </mat-form-field>\r\n      </form>\r\n   </mat-dialog-content>\r\n   <mat-dialog-actions>\r\n      <button mat-raised-button class=\"tos-primary-button\" [mat-dialog-close]=data.customer *ngIf=\"data.customer.id !== ''\">Update</button>\r\n      <button mat-raised-button class=\"tos-primary-button\" [mat-dialog-close]=data.customer *ngIf=\"data.customer.id === ''\">Add</button>\r\n      <button mat-button mat-dialog-close=\"dialogDismissed\" disableRipple=\"true\" class=\"tos-button\">Cancel</button>\r\n   </mat-dialog-actions>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -810,6 +936,7 @@ var CustomerViewComponent = /** @class */ (function () {
         this.goalTenures = ['Weekly', 'Monthly', 'Yearly'];
         this.matIconRegistry.addSvgIcon("phone", this.domSanitizer.bypassSecurityTrustResourceUrl("./assets/icons/phone.svg"));
         this.matIconRegistry.addSvgIcon("human-greeting", this.domSanitizer.bypassSecurityTrustResourceUrl("./assets/icons/human-greeting.svg"));
+        this.matIconRegistry.addSvgIcon("align", this.domSanitizer.bypassSecurityTrustResourceUrl("./assets/icons/baseline.svg"));
     }
     CustomerViewComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -917,6 +1044,11 @@ var CustomerViewComponent = /** @class */ (function () {
         this.utilityService.addBreadCrumb(3, 'Team', 'view/team', teamId, 'entity', entity.name);
         this.router.navigate(['view/team', teamId], { skipLocationChange: false });
     };
+    CustomerViewComponent.prototype.navigateAlign = function (customerId) {
+        console.log(customerId);
+        this.utilityService.addBreadCrumb(3, 'Align', 'view/align', customerId, 'entity', 'Phase');
+        this.router.navigate(['view/align', customerId]);
+    };
     CustomerViewComponent.prototype.delelteEntity = function (entityName, id, entityArray) {
         this.dataService.delelteEntity(entityName, id)
             .then(function (resCustomerData) {
@@ -952,7 +1084,7 @@ var CustomerViewComponent = /** @class */ (function () {
 /***/ "./src/app/customer/customer-view.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"customer != undefined\">\n   <h2 >{{customer.name}}</h2>\n   <span class=\"tos-entity-top-content\">\n      <mat-icon svgIcon=\"phone\" title=\"Contact\"></mat-icon>\n      <a class=\"tos-text\"> {{customer.contact}} &emsp;&emsp;&emsp;</a>\n      <mat-icon svgIcon=\"human-greeting\"  title=\"Contact Person\"></mat-icon>\n      <a class=\"tos-text\"> {{customer.contactPerson}} &emsp;&emsp;&emsp;</a>\n      <mat-icon  title=\"Domain\">domain</mat-icon>\n      <a class=\"tos-text\"> {{customer.domain}} </a>\n   </span>\n</div>\n<mat-accordion [multi]=\"true\" @fade>\n   <mat-expansion-panel (opened)=\"panelOpenState = true\" (closed)=\"panelOpenState = false\" [expanded]=\"true\" >\n   <mat-expansion-panel-header>\n      <mat-panel-title>\n         <h3>Customer Goals</h3>\n      </mat-panel-title>\n      <mat-panel-description>\n         <!--Currently I am {{panelOpenState ? 'open' : 'closed'}}-->\n      </mat-panel-description>\n   </mat-expansion-panel-header>\n   <div class=\" tos-button-right\">\n      <span  (click)=\"openDialog('goals')\" class=\"tos-add-button\">+</span>\n   </div>\n   <div class=\"container\" fxlayout=\"row\" fxLayout.xs=\"column\" fxLayoutWrap fxLayoutGap=\"1%\" fxLayoutAlign=\"flex-start\">\n      <div fxFlex=\"30%\" *ngFor = \"let goal of customerGoals\">\n         <mat-card class=\"example-card\" >\n            <mat-card-header>\n               <mat-card-title>\n                  <h3><span >{{goal.description}}</span></h3>\n               </mat-card-title>\n               <mat-card-subtitle></mat-card-subtitle>\n            </mat-card-header>\n            <mat-card-content>\n               Tenure: {{goal.tenure}} <br>\n               Status: {{goal.status}}<br>\n               Details: {{goal.details}}<br>\n               Signed By: {{goal.signedBy}}\n            </mat-card-content>\n            <mat-card-actions>\n               <span (click)=\"openUpdateDialog('goals',goal.id)\" style=\"cursor:pointer;color:grey\">\n                  <mat-icon  >create</mat-icon>\n               </span>\n               &emsp;\n               <span (click)=\"delelteEntity('goals',goal.id,customerGoals)\" style=\"cursor:pointer; color:grey\">\n                  <mat-icon  >delete</mat-icon>\n               </span>\n            </mat-card-actions>\n         </mat-card>\n      </div>\n      <div *ngIf=\"customerGoals.length===0\" class=\"tos-content-color\">No Goals Defined </div>\n   </div>\n   </mat-expansion-panel>\n   <mat-expansion-panel (opened)=\"panelOpenState = true\" (closed)=\"panelOpenState = false\" [expanded]=\"true\">\n   <mat-expansion-panel-header>\n      <mat-panel-title>\n         <h3>Customer Teams</h3>\n      </mat-panel-title>\n      <mat-panel-description>\n         <!--Currently I am {{panelOpenState ? 'open' : 'closed'}}-->\n      </mat-panel-description>\n   </mat-expansion-panel-header>\n   <div class=\" tos-button-right\">\n      <span  (click)=\"openDialog('teams')\" class=\"tos-add-button\">+</span>\n   </div>\n   <div class=\"container\" fxlayout=\"row\" fxLayout.xs=\"column\" fxLayoutWrap fxLayoutGap=\"1%\" fxLayoutAlign=\"flex-start\">\n      <div fxFlex=\"30%\" *ngFor = \"let team of customerTeams\">\n         <mat-card class=\"example-card\" >\n            <mat-card-header>\n               <mat-card-title>\n                  <h3 class=\"shake-hover-style\"><span class=\"tos-cust-heading\" (click)=\"navigateViewTeam(team.id)\">{{team.name}}</span></h3>\n               </mat-card-title>\n            </mat-card-header>\n            <mat-card-content>\n               Specialization:  {{team.specialization}}\n            </mat-card-content>\n            <mat-card-actions>\n               <span (click)=\"openUpdateDialog('teams',team.id)\" style=\"cursor:pointer;color:grey\">\n                  <mat-icon  >create</mat-icon>\n               </span>\n               &emsp;\n               <span (click)=\"delelteEntity('teams',team.id,customerTeams)\" style=\"cursor:pointer; color:grey\">\n                  <mat-icon  >delete</mat-icon>\n               </span>\n            </mat-card-actions>\n         </mat-card>\n      </div>\n      <div *ngIf=\"customerTeams.length===0\" class=\"tos-content-color\">No Teams Assigned </div>\n   </div>\n   </mat-expansion-panel>\n   <mat-expansion-panel (opened)=\"panelOpenState = true\" (closed)=\"panelOpenState = false\" [expanded]=\"true\">\n   <mat-expansion-panel-header>\n      <mat-panel-title>\n         <h3>StakeHolders</h3>\n      </mat-panel-title>\n      <mat-panel-description>\n         <!--Currently I am {{panelOpenState ? 'open' : 'closed'}}-->\n      </mat-panel-description>\n   </mat-expansion-panel-header>\n   <div class=\" tos-button-right\">\n      <span  (click)=\"openDialog('stakeholders')\" class=\"tos-add-button\">+</span>\n   </div>\n   <div class=\"container\" fxlayout=\"row\" fxLayout.xs=\"column\" fxLayoutWrap fxLayoutGap=\"1%\" fxLayoutAlign=\"flex-start\">\n      <div fxFlex=\"30%\" *ngFor = \"let sholder of customerStakeholders\">\n         <mat-card class=\"example-card\" >\n            <mat-card-header>\n               <mat-card-title>\n                  <h3><span>{{sholder.name}}</span>\n                    <span class=\"tos-subtitle\" *ngIf=\"sholder.contactPerson === true\"> (Contact Person) </span></h3>\n               </mat-card-title>\n            </mat-card-header>\n            <mat-card-content>\n               Role: {{sholder.role}} <br>\n               EMail: {{sholder.email}}<br>\n               Contact: {{sholder.phoneNo}}<br>\n            </mat-card-content>\n            <mat-card-actions>\n               <span (click)=\"openUpdateDialog('stakeholders',sholder.id)\" style=\"cursor:pointer;color:grey\">\n                  <mat-icon  >create</mat-icon>\n               </span>\n               &emsp;\n               <span (click)=\"delelteEntity('stakeholders',sholder.id,customerStakeholders)\" style=\"cursor:pointer; color:grey\">\n                  <mat-icon  >delete</mat-icon>\n               </span>\n            </mat-card-actions>\n         </mat-card>\n      </div>\n      <div *ngIf=\"customerStakeholders.length===0\" class=\"tos-content-color\">No StakeHolders Present</div>\n   </div>\n   </mat-expansion-panel>\n   <mat-expansion-panel (opened)=\"panelOpenState = true\" (closed)=\"panelOpenState = false\" [expanded]=\"true\">\n   <mat-expansion-panel-header>\n      <mat-panel-title>\n         <h3>Travels</h3>\n      </mat-panel-title>\n      <mat-panel-description>\n         <!--Currently I am {{panelOpenState ? 'open' : 'closed'}}-->\n      </mat-panel-description>\n   </mat-expansion-panel-header>\n   <div class=\" tos-button-right\">\n      <span  (click)=\"openDialog('travels')\" class=\"tos-add-button\">+</span>\n   </div>\n   <div class=\"container\" fxlayout=\"row\" fxLayout.xs=\"column\" fxLayoutWrap fxLayoutGap=\"1%\" fxLayoutAlign=\"flex-start\">\n      <div fxFlex=\"30%\" *ngFor = \"let travel of customerTravels\">\n         <mat-card class=\"example-card\" >\n            <mat-card-header>\n               <mat-card-title>\n                  <h3><span  >Travelling: {{travel.name}}</span></h3>\n               </mat-card-title>\n            </mat-card-header>\n            <mat-card-content>\n               Travelling from: {{travel.travellingFrom}} To {{travel.travellingTo}}<br>\n               Date: {{travel.travellingFromDate | date : 'd-M-yy'}} To {{travel.travellingToDate | date : 'd-M-yy'}}<br>\n               Purpose: {{travel.purpose}}\n            </mat-card-content>\n            <mat-card-actions>\n               <span (click)=\"openUpdateDialog('travels',travel.id)\" style=\"cursor:pointer;color:grey\">\n                  <mat-icon  >create</mat-icon>\n               </span>\n               &emsp;\n               <span (click)=\"delelteEntity('travels',travel.id,customerTravels)\" style=\"cursor:pointer; color:grey\">\n                  <mat-icon  >delete</mat-icon>\n               </span>\n            </mat-card-actions>\n         </mat-card>\n      </div>\n      <div *ngIf=\"customerTravels.length===0\" class=\"tos-content-color\">No Travels Scheduled</div>\n   </div>\n   </mat-expansion-panel>\n</mat-accordion>\n"
+module.exports = "<div *ngIf=\"customer != undefined\">\n   <h2 >{{customer.name}}</h2>\n   <span class=\"tos-entity-top-content\">\n      <mat-icon svgIcon=\"phone\" title=\"Contact\"></mat-icon>\n      <a class=\"tos-text\"> {{customer.contact}} &emsp;&emsp;&emsp;</a>\n      <mat-icon svgIcon=\"human-greeting\"  title=\"Contact Person\"></mat-icon>\n      <a class=\"tos-text\"> {{customer.contactPerson}} &emsp;&emsp;&emsp;</a>\n      <mat-icon  title=\"Domain\">domain</mat-icon>\n      <a class=\"tos-text\"> {{customer.domain}} &emsp;&emsp;&emsp;</a>\n      <mat-icon svgIcon=\"align\" title=\"align\">align</mat-icon>\n      <a class=\"tos-text\" (click)=\"navigateAlign(customer.id)\" style=\"cursor:pointer\"> Start Align Phase </a>\n   </span>\n</div>\n<mat-accordion [multi]=\"true\" @fade>\n   <mat-expansion-panel (opened)=\"panelOpenState = true\" (closed)=\"panelOpenState = false\" [expanded]=\"true\" >\n   <mat-expansion-panel-header>\n      <mat-panel-title>\n         <h3>Customer Goals</h3>\n      </mat-panel-title>\n      <mat-panel-description>\n         <!--Currently I am {{panelOpenState ? 'open' : 'closed'}}-->\n      </mat-panel-description>\n   </mat-expansion-panel-header>\n   <div class=\" tos-button-right\">\n      <span  (click)=\"openDialog('goals')\" class=\"tos-add-button\">+</span>\n   </div>\n   <div class=\"container\" fxlayout=\"row\" fxLayout.xs=\"column\" fxLayoutWrap fxLayoutGap=\"1%\" fxLayoutAlign=\"flex-start\">\n      <div fxFlex=\"30%\" *ngFor = \"let goal of customerGoals\">\n         <mat-card class=\"example-card\" >\n            <mat-card-header>\n               <mat-card-title>\n                  <h3><span >{{goal.description}}</span></h3>\n               </mat-card-title>\n               <mat-card-subtitle></mat-card-subtitle>\n            </mat-card-header>\n            <mat-card-content>\n               Tenure: {{goal.tenure}} <br>\n               Status: {{goal.status}}<br>\n               Details: {{goal.details}}<br>\n               Signed By: {{goal.signedBy}}\n            </mat-card-content>\n            <mat-card-actions>\n               <span (click)=\"openUpdateDialog('goals',goal.id)\" style=\"cursor:pointer;color:grey\">\n                  <mat-icon  >create</mat-icon>\n               </span>\n               &emsp;\n               <span (click)=\"delelteEntity('goals',goal.id,customerGoals)\" style=\"cursor:pointer; color:grey\">\n                  <mat-icon  >delete</mat-icon>\n               </span>\n            </mat-card-actions>\n         </mat-card>\n      </div>\n      <div *ngIf=\"customerGoals.length===0\" class=\"tos-content-color\">No Goals Defined </div>\n   </div>\n   </mat-expansion-panel>\n   <mat-expansion-panel (opened)=\"panelOpenState = true\" (closed)=\"panelOpenState = false\" [expanded]=\"true\">\n   <mat-expansion-panel-header>\n      <mat-panel-title>\n         <h3>Customer Teams</h3>\n      </mat-panel-title>\n      <mat-panel-description>\n         <!--Currently I am {{panelOpenState ? 'open' : 'closed'}}-->\n      </mat-panel-description>\n   </mat-expansion-panel-header>\n   <div class=\" tos-button-right\">\n      <span  (click)=\"openDialog('teams')\" class=\"tos-add-button\">+</span>\n   </div>\n   <div class=\"container\" fxlayout=\"row\" fxLayout.xs=\"column\" fxLayoutWrap fxLayoutGap=\"1%\" fxLayoutAlign=\"flex-start\">\n      <div fxFlex=\"30%\" *ngFor = \"let team of customerTeams\">\n         <mat-card class=\"example-card\" >\n            <mat-card-header>\n               <mat-card-title>\n                  <h3 class=\"shake-hover-style\"><span class=\"tos-cust-heading\" (click)=\"navigateViewTeam(team.id)\">{{team.name}}</span></h3>\n               </mat-card-title>\n            </mat-card-header>\n            <mat-card-content>\n               Specialization:  {{team.specialization}}\n            </mat-card-content>\n            <mat-card-actions>\n               <span (click)=\"openUpdateDialog('teams',team.id)\" style=\"cursor:pointer;color:grey\">\n                  <mat-icon  >create</mat-icon>\n               </span>\n               &emsp;\n               <span (click)=\"delelteEntity('teams',team.id,customerTeams)\" style=\"cursor:pointer; color:grey\">\n                  <mat-icon  >delete</mat-icon>\n               </span>\n            </mat-card-actions>\n         </mat-card>\n      </div>\n      <div *ngIf=\"customerTeams.length===0\" class=\"tos-content-color\">No Teams Assigned </div>\n   </div>\n   </mat-expansion-panel>\n   <mat-expansion-panel (opened)=\"panelOpenState = true\" (closed)=\"panelOpenState = false\" [expanded]=\"true\">\n   <mat-expansion-panel-header>\n      <mat-panel-title>\n         <h3>StakeHolders</h3>\n      </mat-panel-title>\n      <mat-panel-description>\n         <!--Currently I am {{panelOpenState ? 'open' : 'closed'}}-->\n      </mat-panel-description>\n   </mat-expansion-panel-header>\n   <div class=\" tos-button-right\">\n      <span  (click)=\"openDialog('stakeholders')\" class=\"tos-add-button\">+</span>\n   </div>\n   <div class=\"container\" fxlayout=\"row\" fxLayout.xs=\"column\" fxLayoutWrap fxLayoutGap=\"1%\" fxLayoutAlign=\"flex-start\">\n      <div fxFlex=\"30%\" *ngFor = \"let sholder of customerStakeholders\">\n         <mat-card class=\"example-card\" >\n            <mat-card-header>\n               <mat-card-title class=\"tos-stakeholder-title\">\n                  <h3><span>{{sholder.name}}</span>\n                    <span class=\"tos-subtitle\" *ngIf=\"sholder.contactPerson === true\"> (Contact Person) </span></h3>\n               </mat-card-title>\n            </mat-card-header>\n            <mat-card-content>\n               Role: {{sholder.role}} <br>\n               EMail: {{sholder.email}}<br>\n               Contact: {{sholder.phoneNo}}<br>\n            </mat-card-content>\n            <mat-card-actions>\n               <span (click)=\"openUpdateDialog('stakeholders',sholder.id)\" style=\"cursor:pointer;color:grey\">\n                  <mat-icon  >create</mat-icon>\n               </span>\n               &emsp;\n               <span (click)=\"delelteEntity('stakeholders',sholder.id,customerStakeholders)\" style=\"cursor:pointer; color:grey\">\n                  <mat-icon  >delete</mat-icon>\n               </span>\n            </mat-card-actions>\n         </mat-card>\n      </div>\n      <div *ngIf=\"customerStakeholders.length===0\" class=\"tos-content-color\">No StakeHolders Present</div>\n   </div>\n   </mat-expansion-panel>\n   <mat-expansion-panel (opened)=\"panelOpenState = true\" (closed)=\"panelOpenState = false\" [expanded]=\"true\">\n   <mat-expansion-panel-header>\n      <mat-panel-title>\n         <h3>Travels</h3>\n      </mat-panel-title>\n      <mat-panel-description>\n         <!--Currently I am {{panelOpenState ? 'open' : 'closed'}}-->\n      </mat-panel-description>\n   </mat-expansion-panel-header>\n   <div class=\" tos-button-right\">\n      <span  (click)=\"openDialog('travels')\" class=\"tos-add-button\">+</span>\n   </div>\n   <div class=\"container\" fxlayout=\"row\" fxLayout.xs=\"column\" fxLayoutWrap fxLayoutGap=\"1%\" fxLayoutAlign=\"flex-start\">\n      <div fxFlex=\"30%\" *ngFor = \"let travel of customerTravels\">\n         <mat-card class=\"example-card\" >\n            <mat-card-header>\n               <mat-card-title>\n                  <h3><span  >Travelling: {{travel.name}}</span></h3>\n               </mat-card-title>\n            </mat-card-header>\n            <mat-card-content>\n               Travelling from: {{travel.travellingFrom}} To {{travel.travellingTo}}<br>\n               Date: {{travel.travellingFromDate | date : 'd-M-yy'}} To {{travel.travellingToDate | date : 'd-M-yy'}}<br>\n               Purpose: {{travel.purpose}}\n            </mat-card-content>\n            <mat-card-actions>\n               <span (click)=\"openUpdateDialog('travels',travel.id)\" style=\"cursor:pointer;color:grey\">\n                  <mat-icon  >create</mat-icon>\n               </span>\n               &emsp;\n               <span (click)=\"delelteEntity('travels',travel.id,customerTravels)\" style=\"cursor:pointer; color:grey\">\n                  <mat-icon  >delete</mat-icon>\n               </span>\n            </mat-card-actions>\n         </mat-card>\n      </div>\n      <div *ngIf=\"customerTravels.length===0\" class=\"tos-content-color\">No Travels Scheduled</div>\n   </div>\n   </mat-expansion-panel>\n</mat-accordion>\n"
 
 /***/ }),
 
@@ -2248,7 +2380,7 @@ var EmployeeViewComponent = /** @class */ (function () {
 /***/ "./src/app/employee/employee-view.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"employee != undefined\">\n   <h2>{{employee.name}} </h2>\n   <span class=\"tos-entity-top-content\">\n   <a class=\"tos-text\"> <b> Joining Date : </b> {{employee.joiningDate | date : 'd-M-yy'}}  &emsp;&emsp;&emsp;</a>\n   <a class=\"tos-text\"><b> Responsibilities : </b> {{employee.responsibilities}} &emsp;&emsp;&emsp;</a>\n   <a class=\"tos-text\"> <b> Total years of Experience : </b> {{employee.yearsOfExperience}}  </a>\n   </span>\n</div>\n<mat-accordion [multi]=\"true\" @fade>\n<mat-expansion-panel (opened)=\"panelOpenState = true\" (closed)=\"panelOpenState = false\" [expanded]=\"true\">\n<mat-expansion-panel-header>\n   <mat-panel-title>\n      <h3>Skills</h3>\n   </mat-panel-title>\n   <mat-panel-description>\n      <!--Currently I am {{panelOpenState ? 'open' : 'closed'}}-->\n   </mat-panel-description>\n</mat-expansion-panel-header>\n<div class=\" tos-button-right\">\n   <span  (click)=\"openDialog('skills')\" class=\"tos-add-button\">+</span>\n</div>\n<div class=\"container\" fxlayout=\"row\" fxLayout.xs=\"column\" fxLayoutWrap fxLayoutGap=\"1%\" fxLayoutAlign=\"flex-start\">\n   <div fxFlex=\"30%\" *ngFor = \"let skill of employeeSkills\" >\n      <mat-card class=\"example-card\" >\n         <mat-card-header>\n            <mat-card-title>\n               <h3><span class=\"tos-cust-heading\"> {{skill.name}}</span></h3>\n               <span *ngIf=\"skill.rating !== ''\" class=\"tos-stars\">\n                  <a class=\"tos-rating\" *ngFor=\"let i of Arr(+skill.rating).fill(1)\">\n                     <mat-icon >star rate</mat-icon>\n                  </a>\n               </span>\n            </mat-card-title>\n         </mat-card-header>\n         <mat-card-content>\n            Worked for: {{skill.duration}} months<br>Last Used: {{skill.lastUsed}}<br>\n         </mat-card-content>\n         <mat-card-actions>\n            <span (click)=\"openUpdateDialog('skills',skill.id)\" style=\"cursor:pointer;color:grey\">\n               <mat-icon>create</mat-icon>\n            </span>\n            &emsp;\n            <span (click)=\"delelteEntity('skills', skill.id, employeeSkills )\" style=\"cursor:pointer; color:grey\">\n               <mat-icon>delete</mat-icon>\n            </span>\n         </mat-card-actions>\n      </mat-card>\n   </div>\n   <div *ngIf=\"employeeSkills.length===0\"  class=\"tos-content-color\">No Skills Updated </div>\n</div>\n</mat-expansion-panel>\n<mat-expansion-panel (opened)=\"panelOpenState = true\" (closed)=\"panelOpenState = false\" [expanded]=\"true\">\n<mat-expansion-panel-header>\n   <mat-panel-title>\n      <h3>Certifications</h3>\n   </mat-panel-title>\n   <mat-panel-description>\n      <!--Currently I am {{panelOpenState ? 'open' : 'closed'}}-->\n   </mat-panel-description>\n</mat-expansion-panel-header>\n<div class=\" tos-button-right\">\n   <span  (click)=\"openDialog('certifications')\" class=\"tos-add-button\">+</span>\n</div>\n<div class=\"container\" fxlayout=\"row\" fxLayout.xs=\"column\" fxLayoutWrap fxLayoutGap=\"1%\" fxLayoutAlign=\"flex-start\">\n   <div fxFlex=\"30%\" *ngFor = \"let certification of employeeCertifications\">\n      <mat-card class=\"example-card\" >\n         <mat-card-header>\n            <mat-card-title>\n               <h3><span class=\"tos-cust-heading\"> {{certification.name}}</span></h3>\n            </mat-card-title>\n         </mat-card-header>\n         <mat-card-content>\n            Certification Year : {{certification.yearOfCertification}}\n         </mat-card-content>\n         <mat-card-actions>\n            <span (click)=\"openUpdateDialog('certifications',certification.id)\" style=\"cursor:pointer;color:grey\">\n               <mat-icon  >create</mat-icon>\n            </span>\n            &emsp;\n            <span (click)=\"delelteEntity('certifications', certification.id, employeeCertifications)\" style=\"cursor:pointer; color:grey\">\n               <mat-icon  >delete</mat-icon>\n            </span>\n         </mat-card-actions>\n      </mat-card>\n   </div>\n   <div *ngIf=\"employeeCertifications.length===0\"  class=\"tos-content-color\">No Certifications </div>\n</div>\n</mat-expansion-panel>\n<mat-expansion-panel (opened)=\"panelOpenState = true\" (closed)=\"panelOpenState = false\" [expanded]=\"true\">\n<mat-expansion-panel-header>\n   <mat-panel-title>\n      <h3>Trainings</h3>\n   </mat-panel-title>\n   <mat-panel-description>\n      <!--Currently I am {{panelOpenState ? 'open' : 'closed'}}-->\n   </mat-panel-description>\n</mat-expansion-panel-header>\n<div class=\" tos-button-right\">\n   <span  (click)=\"openDialog('trainings')\" class=\"tos-add-button\">+</span>\n</div>\n<div class=\"container\" fxlayout=\"row\" fxLayout.xs=\"column\" fxLayoutWrap fxLayoutGap=\"1%\" fxLayoutAlign=\"flex-start\">\n   <div fxFlex=\"30%\" *ngFor = \"let training of employeeTrainings\">\n      <mat-card class=\"example-card\" >\n         <mat-card-header>\n            <mat-card-title>\n               <h3><span class=\"tos-cust-heading\"> {{training.name}}</span></h3>\n            </mat-card-title>\n            <!--     <mat-card-subtitle>Trainings</mat-card-subtitle> -->\n         </mat-card-header>\n         <mat-card-content>\n            Mode : {{ training.mode}}<br>Training proposed Date : {{ training.proposedDate | date : 'd-M-yy'}}\n            <br>Reason: {{ training.reason}}\n         </mat-card-content>\n         <mat-card-actions>\n            <span (click)=\"openUpdateDialog('trainings',training.id)\" style=\"cursor:pointer;color:grey\">\n               <mat-icon  >create</mat-icon>\n            </span>\n            &emsp;\n            <span (click)=\"delelteEntity('trainings', training.id, employeeTrainings )\" style=\"cursor:pointer; color:grey\">\n               <mat-icon  >delete</mat-icon>\n            </span>\n         </mat-card-actions>\n      </mat-card>\n   </div>\n   <div *ngIf=\"employeeTrainings.length===0\" class=\"tos-content-color\">No Trainings scheduled </div>\n</div>\n</mat-expansion-panel>\n<mat-expansion-panel (opened)=\"panelOpenState = true\" (closed)=\"panelOpenState = false\" [expanded]=\"true\">\n<mat-expansion-panel-header>\n   <mat-panel-title>\n      <h3>Feedbacks</h3>\n   </mat-panel-title>\n   <mat-panel-description>\n      <!--Currently I am {{panelOpenState ? 'open' : 'closed'}}-->\n   </mat-panel-description>\n</mat-expansion-panel-header>\n<div class=\" tos-button-right\">\n   <span  (click)=\"openDialog('feedbacks')\" class=\"tos-add-button\">+</span>\n</div>\n<div class=\"container\" fxlayout=\"row\" fxLayout.xs=\"column\" fxLayoutWrap fxLayoutGap=\"1%\" fxLayoutAlign=\"flex-start\">\n   <div fxFlex=\"30%\" *ngFor = \"let feedback of employeeFeedbacks\">\n      <mat-card class=\"example-card\" >\n         <mat-card-header>\n            <mat-card-title>\n               <h3><span class=\"tos-cust-heading\">{{feedback.feedback}}</span></h3>\n            </mat-card-title>\n         </mat-card-header>\n         <mat-card-content>\n            Recieved From: {{feedback.receivedFrom}} <br>Action Taken: {{feedback.actionsTaken}}<br>\n         </mat-card-content>\n         <mat-card-actions>\n            <span (click)=\"openUpdateDialog('feedbacks',feedback.id)\" style=\"cursor:pointer;color:grey\">\n               <mat-icon  >create</mat-icon>\n            </span>\n            &emsp;\n            <span (click)=\"delelteEntity('feedbacks', feedback.id, employeeFeedbacks)\" style=\"cursor:pointer; color:grey\">\n               <mat-icon  >delete</mat-icon>\n            </span>\n         </mat-card-actions>\n      </mat-card>\n   </div>\n   <div *ngIf=\"employeeFeedbacks.length===0\"  class=\"tos-content-color\">No Feedbacks</div>\n</div>\n</mat-expansion-panel>\n<mat-expansion-panel (opened)=\"panelOpenState = true\" (closed)=\"panelOpenState = false\" [expanded]=\"true\">\n<mat-expansion-panel-header>\n   <mat-panel-title>\n      <h3>Improvement Areas</h3>\n   </mat-panel-title>\n   <mat-panel-description>\n      <!--Currently I am {{panelOpenState ? 'open' : 'closed'}}-->\n   </mat-panel-description>\n</mat-expansion-panel-header>\n<div class=\" tos-button-right\">\n   <span  (click)=\"openDialog('improvementareas')\" class=\"tos-add-button\">+</span>\n</div>\n<div class=\"container\" fxlayout=\"row\" fxLayout.xs=\"column\" fxLayoutWrap fxLayoutGap=\"1%\" fxLayoutAlign=\"flex-start\">\n   <div fxFlex=\"30%\" *ngFor = \"let improvementArea of employeeImprovementAreas\">\n      <mat-card class=\"example-card\" >\n         <mat-card-header>\n            <mat-card-title>\n               <h3><span class=\"tos-cust-heading\">{{improvementArea.areasOfImprovement}}</span></h3>\n            </mat-card-title>\n         </mat-card-header>\n         <mat-card-content>\n            Plan : {{improvementArea.improvementPlan}} <br>\n            Proposed Date: {{improvementArea.proposedDate | date : 'd-M-yy'}}<br>\n         </mat-card-content>\n         <mat-card-actions>\n            <span (click)=\"openUpdateDialog('improvementareas', improvementArea.id)\" style=\"cursor:pointer;color:grey\">\n               <mat-icon  >create</mat-icon>\n            </span>\n            &emsp;\n            <span (click)=\"delelteEntity('improvementareas', improvementArea.id, employeeImprovementAreas )\" style=\"cursor:pointer; color:grey\">\n               <mat-icon  >delete</mat-icon>\n            </span>\n         </mat-card-actions>\n      </mat-card>\n   </div>\n   <div *ngIf=\"employeeImprovementAreas.length===0\"  class=\"tos-content-color\">No improvement Areas Defined </div>\n</div>\n</mat-expansion-panel>\n<mat-expansion-panel (opened)=\"panelOpenState = true\" (closed)=\"panelOpenState = false\" [expanded]=\"true\">\n<mat-expansion-panel-header>\n   <mat-panel-title>\n      <h3>Teams</h3>\n   </mat-panel-title>\n   <mat-panel-description>\n      <!--Currently I am {{panelOpenState ? 'open' : 'closed'}}-->\n   </mat-panel-description>\n</mat-expansion-panel-header>\n<div class=\"container\" fxlayout=\"row\" fxLayout.xs=\"column\" fxLayoutWrap fxLayoutGap=\"1%\" fxLayoutAlign=\"flex-start\">\n   <div fxFlex=\"30%\" *ngFor = \"let team of teams\">\n      <mat-card class=\"example-card\" >\n         <mat-card-header>\n            <mat-card-title>\n              <h3 class=\"shake-hover-style\"><span (click)=\"navigateViewTeam(team.id)\" class=\"tos-cust-heading\">{{team.name}} </span></h3>\n            </mat-card-title>\n         </mat-card-header>\n         <mat-card-content><span (click)=\"navigateViewTeam(team.id)\" class=\"tos-cust-heading\"> {{team.specialization}} <br></span>\n         </mat-card-content>\n         <mat-card-actions>\n         </mat-card-actions>\n      </mat-card>\n   </div>\n   <div *ngIf=\"teams.length===0\"  class=\"tos-content-color\">No Teams Present </div>\n</div>\n</mat-expansion-panel>\n</mat-accordion>\n"
+module.exports = "<div *ngIf=\"employee != undefined\">\n   <h2>{{employee.name}} </h2>\n   <span class=\"tos-entity-top-content\">\n   <a class=\"tos-text\"> <b> Joining Date : </b> {{employee.joiningDate | date : 'd-M-yy'}}  &emsp;&emsp;&emsp;</a>\n   <a class=\"tos-text\"><b> Responsibilities : </b> {{employee.responsibilities}} &emsp;&emsp;&emsp;</a>\n   <a class=\"tos-text\"> <b> Total years of Experience : </b> {{employee.yearsOfExperience}}  </a>\n   </span>\n</div>\n<mat-accordion [multi]=\"true\" @fade>\n<mat-expansion-panel (opened)=\"panelOpenState = true\" (closed)=\"panelOpenState = false\" [expanded]=\"true\">\n<mat-expansion-panel-header>\n   <mat-panel-title>\n      <h3>Skills</h3>\n   </mat-panel-title>\n   <mat-panel-description>\n      <!--Currently I am {{panelOpenState ? 'open' : 'closed'}}-->\n   </mat-panel-description>\n</mat-expansion-panel-header>\n<div class=\" tos-button-right\">\n   <span  (click)=\"openDialog('skills')\" class=\"tos-add-button\">+</span>\n</div>\n<div class=\"container\" fxlayout=\"row\" fxLayout.xs=\"column\" fxLayoutWrap fxLayoutGap=\"1%\" fxLayoutAlign=\"flex-start\">\n   <div fxFlex=\"30%\" *ngFor = \"let skill of employeeSkills\" >\n      <mat-card class=\"example-card\" >\n         <mat-card-header>\n            <mat-card-title>\n               <h3><span class=\"tos-cust-heading\"> {{skill.name}}</span></h3>\n               <span *ngIf=\"skill.rating !== ''\" class=\"tos-stars\">\n                  <a class=\"tos-rating\" *ngFor=\"let i of Arr(+skill.rating).fill(1)\">\n                     <mat-icon >star rate</mat-icon>\n                  </a>\n               </span>\n            </mat-card-title>\n         </mat-card-header>\n         <mat-card-content>\n            Worked for: {{skill.duration}} months<br>Last Used: {{skill.lastUsed}}<br>\n         </mat-card-content>\n         <mat-card-actions>\n            <span (click)=\"openUpdateDialog('skills',skill.id)\" style=\"cursor:pointer;color:grey\">\n               <mat-icon>create</mat-icon>\n            </span>\n            &emsp;\n            <span (click)=\"delelteEntity('skills', skill.id, employeeSkills )\" style=\"cursor:pointer; color:grey\">\n               <mat-icon>delete</mat-icon>\n            </span>\n         </mat-card-actions>\n      </mat-card>\n   </div>\n   <div *ngIf=\"employeeSkills.length===0\"  class=\"tos-content-color\">No Skills Updated </div>\n</div>\n</mat-expansion-panel>\n<mat-expansion-panel (opened)=\"panelOpenState = true\" (closed)=\"panelOpenState = false\" [expanded]=\"true\">\n<mat-expansion-panel-header>\n   <mat-panel-title>\n      <h3>Certifications</h3>\n   </mat-panel-title>\n   <mat-panel-description>\n      <!--Currently I am {{panelOpenState ? 'open' : 'closed'}}-->\n   </mat-panel-description>\n</mat-expansion-panel-header>\n<div class=\" tos-button-right\">\n   <span  (click)=\"openDialog('certifications')\" class=\"tos-add-button\">+</span>\n</div>\n<div class=\"container\" fxlayout=\"row\" fxLayout.xs=\"column\" fxLayoutWrap fxLayoutGap=\"1%\" fxLayoutAlign=\"flex-start\">\n   <div fxFlex=\"30%\" *ngFor = \"let certification of employeeCertifications\">\n      <mat-card class=\"example-card\" >\n         <mat-card-header>\n            <mat-card-title>\n               <h3><span class=\"tos-cust-heading\"> {{certification.name}}</span></h3>\n            </mat-card-title>\n         </mat-card-header>\n         <mat-card-content>\n            Certification Year : {{certification.yearOfCertification}}\n         </mat-card-content>\n         <mat-card-actions>\n            <span (click)=\"openUpdateDialog('certifications',certification.id)\" style=\"cursor:pointer;color:grey\">\n               <mat-icon  >create</mat-icon>\n            </span>\n            &emsp;\n            <span (click)=\"delelteEntity('certifications', certification.id, employeeCertifications)\" style=\"cursor:pointer; color:grey\">\n               <mat-icon  >delete</mat-icon>\n            </span>\n         </mat-card-actions>\n      </mat-card>\n   </div>\n   <div *ngIf=\"employeeCertifications.length===0\"  class=\"tos-content-color\">No Certifications </div>\n</div>\n</mat-expansion-panel>\n<mat-expansion-panel (opened)=\"panelOpenState = true\" (closed)=\"panelOpenState = false\" [expanded]=\"true\">\n<mat-expansion-panel-header>\n   <mat-panel-title>\n      <h3>Trainings</h3>\n   </mat-panel-title>\n   <mat-panel-description>\n      <!--Currently I am {{panelOpenState ? 'open' : 'closed'}}-->\n   </mat-panel-description>\n</mat-expansion-panel-header>\n<div class=\" tos-button-right\">\n   <span  (click)=\"openDialog('trainings')\" class=\"tos-add-button\">+</span>\n</div>\n<div class=\"container\" fxlayout=\"row\" fxLayout.xs=\"column\" fxLayoutWrap fxLayoutGap=\"1%\" fxLayoutAlign=\"flex-start\">\n   <div fxFlex=\"30%\" *ngFor = \"let training of employeeTrainings\">\n      <mat-card class=\"example-card\" >\n         <mat-card-header>\n            <mat-card-title>\n               <h3><span class=\"tos-cust-heading\"> {{training.name}}</span></h3>\n            </mat-card-title>\n            <!--     <mat-card-subtitle>Trainings</mat-card-subtitle> -->\n         </mat-card-header>\n         <mat-card-content>\n            Mode : {{ training.mode}}<br>Training proposed Date : {{ training.proposedDate | date : 'd-M-yy'}}\n            <br>Reason: {{ training.reason}}\n         </mat-card-content>\n         <mat-card-actions>\n            <span (click)=\"openUpdateDialog('trainings',training.id)\" style=\"cursor:pointer;color:grey\">\n               <mat-icon  >create</mat-icon>\n            </span>\n            &emsp;\n            <span (click)=\"delelteEntity('trainings', training.id, employeeTrainings )\" style=\"cursor:pointer; color:grey\">\n               <mat-icon  >delete</mat-icon>\n            </span>\n         </mat-card-actions>\n      </mat-card>\n   </div>\n   <div *ngIf=\"employeeTrainings.length===0\" class=\"tos-content-color\">No Trainings scheduled </div>\n</div>\n</mat-expansion-panel>\n<mat-expansion-panel (opened)=\"panelOpenState = true\" (closed)=\"panelOpenState = false\" [expanded]=\"true\">\n<mat-expansion-panel-header>\n   <mat-panel-title>\n      <h3>Feedbacks</h3>\n   </mat-panel-title>\n   <mat-panel-description>\n      <!--Currently I am {{panelOpenState ? 'open' : 'closed'}}-->\n   </mat-panel-description>\n</mat-expansion-panel-header>\n<div class=\" tos-button-right\">\n   <span  (click)=\"openDialog('feedbacks')\" class=\"tos-add-button\">+</span>\n</div>\n<div class=\"container\" fxlayout=\"row\" fxLayout.xs=\"column\" fxLayoutWrap fxLayoutGap=\"1%\" fxLayoutAlign=\"flex-start\">\n   <div fxFlex=\"30%\" *ngFor = \"let feedback of employeeFeedbacks\">\n      <mat-card class=\"example-card\" >\n         <mat-card-header>\n            <mat-card-title>\n               <h3><span class=\"tos-cust-heading\">{{feedback.feedback}}</span></h3>\n            </mat-card-title>\n         </mat-card-header>\n         <mat-card-content>\n            Recieved From: {{feedback.receivedFrom}} <br>Action Taken: {{feedback.actionsTaken}}<br>\n         </mat-card-content>\n         <mat-card-actions>\n            <span (click)=\"openUpdateDialog('feedbacks',feedback.id)\" style=\"cursor:pointer;color:grey\">\n               <mat-icon  >create</mat-icon>\n            </span>\n            &emsp;\n            <span (click)=\"delelteEntity('feedbacks', feedback.id, employeeFeedbacks)\" style=\"cursor:pointer; color:grey\">\n               <mat-icon  >delete</mat-icon>\n            </span>\n         </mat-card-actions>\n      </mat-card>\n   </div>\n   <div *ngIf=\"employeeFeedbacks.length===0\"  class=\"tos-content-color\">No Feedbacks</div>\n</div>\n</mat-expansion-panel>\n<mat-expansion-panel (opened)=\"panelOpenState = true\" (closed)=\"panelOpenState = false\" [expanded]=\"true\">\n<mat-expansion-panel-header>\n   <mat-panel-title>\n      <h3>Improvement Areas</h3>\n   </mat-panel-title>\n   <mat-panel-description>\n      <!--Currently I am {{panelOpenState ? 'open' : 'closed'}}-->\n   </mat-panel-description>\n</mat-expansion-panel-header>\n<div class=\" tos-button-right\">\n   <span  (click)=\"openDialog('improvementareas')\" class=\"tos-add-button\">+</span>\n</div>\n<div class=\"container\" fxlayout=\"row\" fxLayout.xs=\"column\" fxLayoutWrap fxLayoutGap=\"1%\" fxLayoutAlign=\"flex-start\">\n   <div fxFlex=\"30%\" *ngFor = \"let improvementArea of employeeImprovementAreas\">\n      <mat-card class=\"example-card\" >\n         <mat-card-header>\n            <mat-card-title>\n               <h3><span class=\"tos-cust-heading\">{{improvementArea.areasOfImprovement}}</span></h3>\n            </mat-card-title>\n         </mat-card-header>\n         <mat-card-content>\n            Plan : {{improvementArea.improvementPlan}} <br>\n            Proposed Date: {{improvementArea.proposedDate | date : 'd-M-yy'}}<br>\n         </mat-card-content>\n         <mat-card-actions>\n            <span (click)=\"openUpdateDialog('improvementareas', improvementArea.id)\" style=\"cursor:pointer;color:grey\">\n               <mat-icon  >create</mat-icon>\n            </span>\n            &emsp;\n            <span (click)=\"delelteEntity('improvementareas', improvementArea.id, employeeImprovementAreas )\" style=\"cursor:pointer; color:grey\">\n               <mat-icon  >delete</mat-icon>\n            </span>\n         </mat-card-actions>\n      </mat-card>\n   </div>\n   <div *ngIf=\"employeeImprovementAreas.length===0\"  class=\"tos-content-color\">No improvement Areas Defined </div>\n</div>\n</mat-expansion-panel>\n<mat-expansion-panel (opened)=\"panelOpenState = true\" (closed)=\"panelOpenState = false\" [expanded]=\"true\">\n<mat-expansion-panel-header>\n   <mat-panel-title>\n      <h3>Teams</h3>\n   </mat-panel-title>\n   <mat-panel-description>\n      <!--Currently I am {{panelOpenState ? 'open' : 'closed'}}-->\n   </mat-panel-description>\n</mat-expansion-panel-header>\n<div class=\"container\" fxlayout=\"row\" fxLayout.xs=\"column\" fxLayoutWrap fxLayoutGap=\"1%\" fxLayoutAlign=\"flex-start\">\n   <div fxFlex=\"30%\" *ngFor = \"let team of teams\">\n      <mat-card class=\"example-card\" >\n         <mat-card-header>\n            <mat-card-title>\n              <h3 class=\"shake-hover-style\"><span (click)=\"navigateViewTeam(team.id)\" class=\"tos-cust-heading\">{{team.name}} </span></h3>\n            </mat-card-title>\n         </mat-card-header>\n         <mat-card-content><span (click)=\"navigateViewTeam(team.id)\"> {{team.specialization}} <br></span>\n         </mat-card-content>\n         <mat-card-actions>\n         </mat-card-actions>\n      </mat-card>\n   </div>\n   <div *ngIf=\"teams.length===0\"  class=\"tos-content-color\">No Teams Present </div>\n</div>\n</mat-expansion-panel>\n</mat-accordion>\n"
 
 /***/ }),
 
@@ -2665,7 +2797,6 @@ module.exports = "<div fxFlex=\"100%\" >\n\n<p>    © 2018 . All rights reserved
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_animations__ = __webpack_require__("./node_modules/@angular/animations/esm5/animations.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_localStorage_service__ = __webpack_require__("./src/app/services/localStorage.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_data_service__ = __webpack_require__("./src/app/services/data.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2679,13 +2810,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
 var HomeComponent = /** @class */ (function () {
-    function HomeComponent(router, route, localStorageService, dataService) {
+    function HomeComponent(router, localStorageService) {
         this.router = router;
-        this.route = route;
         this.localStorageService = localStorageService;
-        this.dataService = dataService;
     }
     HomeComponent.prototype.ngOnInit = function () {
         if (this.localStorageService.getValueFromLocalStorage() == null)
@@ -2704,8 +2832,7 @@ var HomeComponent = /** @class */ (function () {
                 ])
             ]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__angular_router__["Router"], __WEBPACK_IMPORTED_MODULE_2__angular_router__["ActivatedRoute"], __WEBPACK_IMPORTED_MODULE_3__services_localStorage_service__["a" /* LocalStorageService */],
-            __WEBPACK_IMPORTED_MODULE_4__services_data_service__["a" /* DataService */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__angular_router__["Router"], __WEBPACK_IMPORTED_MODULE_3__services_localStorage_service__["a" /* LocalStorageService */]])
     ], HomeComponent);
     return HomeComponent;
 }());
@@ -2732,6 +2859,7 @@ module.exports = "<h3>Welcome !!!</h3>\n<br><br>\nThis Application is to help Ma
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_auth_service__ = __webpack_require__("./src/app/services/auth.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_localStorage_service__ = __webpack_require__("./src/app/services/localStorage.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_data_service__ = __webpack_require__("./src/app/services/data.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_url_service__ = __webpack_require__("./src/app/services/url.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2747,13 +2875,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var LoginComponent = /** @class */ (function () {
-    function LoginComponent(router, authService, localStorageService, utilityService, dataService) {
+    function LoginComponent(router, authService, localStorageService, utilityService, dataService, urlService) {
         this.router = router;
         this.authService = authService;
         this.localStorageService = localStorageService;
         this.utilityService = utilityService;
         this.dataService = dataService;
+        this.urlService = urlService;
         this.hide = true;
         this.user = {
             username: '',
@@ -2784,19 +2914,7 @@ var LoginComponent = /** @class */ (function () {
         var _this = this;
         this.dataService.postUserEntity('users', usercreds)
             .then(function (resCustomerData) {
-            console.log("abhinab");
-            console.log(_this.dataService.PropUris);
-            if (location.origin === 'http://localhost:4200') {
-                location.href = location.origin;
-            }
-            else {
-                var PropertyUris = JSON.parse(localStorage.getItem("PropertyUris"));
-                console.log("Popr" + PropertyUris);
-                console.log(_this.dataService.PropUris);
-                if (PropertyUris !== null) {
-                    location.href = PropertyUris.appBaseUrl;
-                }
-            }
+            location.href = (location.origin === 'http://localhost:4200') ? location.origin : _this.urlService.getAppBaseUrl();
         }, function (err) { return console.log("users could not be updated :" + err); });
     };
     LoginComponent = __decorate([
@@ -2806,7 +2924,7 @@ var LoginComponent = /** @class */ (function () {
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_router__["Router"], __WEBPACK_IMPORTED_MODULE_3__services_auth_service__["a" /* AuthService */],
             __WEBPACK_IMPORTED_MODULE_4__services_localStorage_service__["a" /* LocalStorageService */], __WEBPACK_IMPORTED_MODULE_2__services_utility_service__["a" /* UtilityService */],
-            __WEBPACK_IMPORTED_MODULE_5__services_data_service__["a" /* DataService */]])
+            __WEBPACK_IMPORTED_MODULE_5__services_data_service__["a" /* DataService */], __WEBPACK_IMPORTED_MODULE_6__services_url_service__["a" /* UrlService */]])
     ], LoginComponent);
     return LoginComponent;
 }());
@@ -3111,9 +3229,10 @@ module.exports = "<h3>Profile Operations</h3>\n<br>\n<br>\n"
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AuthService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__("./node_modules/@angular/http/esm5/http.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_observable_of__ = __webpack_require__("./node_modules/rxjs/_esm5/add/observable/of.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_catch__ = __webpack_require__("./node_modules/rxjs/_esm5/add/operator/catch.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_map__ = __webpack_require__("./node_modules/rxjs/_esm5/add/operator/map.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_url_service__ = __webpack_require__("./src/app/services/url.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_observable_of__ = __webpack_require__("./node_modules/rxjs/_esm5/add/observable/of.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch__ = __webpack_require__("./node_modules/rxjs/_esm5/add/operator/catch.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_map__ = __webpack_require__("./node_modules/rxjs/_esm5/add/operator/map.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3128,25 +3247,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var AuthService = /** @class */ (function () {
-    function AuthService(http) {
+    function AuthService(http, urlService) {
         this.http = http;
+        this.urlService = urlService;
         this.AccessToken = "";
-        this.isAuthenticated = false;
-        this.propertyUris = JSON.parse(localStorage.getItem("PropertyUris"));
     }
     AuthService.prototype.login = function (usercreds) {
         var _this = this;
-        this.propertyUris = JSON.parse(localStorage.getItem("PropertyUris"));
-        if (this.propertyUris !== null) {
-            this.tokenApiURL = this.propertyUris.tokenApiUrl;
-        }
         // Basic bXktdHJ1c3RlZC1jbGllbnQ6c2VjcmV0
         var headersForTokenAPI = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]();
         headersForTokenAPI.append("Content-Type", "application/x-www-form-urlencoded");
         headersForTokenAPI.append("Authorization", "Basic bXktdHJ1c3RlZC1jbGllbnQ6c2VjcmV0");
         var data = "?grant_type=password&username=" + usercreds.username + "&password=" + usercreds.password;
-        return this.http.post(this.tokenApiURL + data, null, { headers: headersForTokenAPI })
+        return this.http.post(this.urlService.getTokenApiUrl() + data, null, { headers: headersForTokenAPI })
             .map(function (res) {
             _this.AccessToken = res.json().access_token;
             return res.json();
@@ -3154,7 +3269,7 @@ var AuthService = /** @class */ (function () {
     };
     AuthService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */], __WEBPACK_IMPORTED_MODULE_2__services_url_service__["a" /* UrlService */]])
     ], AuthService);
     return AuthService;
 }());
@@ -3172,6 +3287,7 @@ var AuthService = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common_http__ = __webpack_require__("./node_modules/@angular/common/esm5/http.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utility_service__ = __webpack_require__("./src/app/services/utility.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__localStorage_service__ = __webpack_require__("./src/app/services/localStorage.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__url_service__ = __webpack_require__("./src/app/services/url.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3185,38 +3301,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var DataService = /** @class */ (function () {
-    function DataService(httpClient, localStorageService, utilityService) {
+    function DataService(httpClient, localStorageService, utilityService, urlService) {
         this.httpClient = httpClient;
         this.localStorageService = localStorageService;
         this.utilityService = utilityService;
-        this.PropUris = undefined;
+        this.urlService = urlService;
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["d" /* HttpHeaders */]().set('Content-Type', 'application/json')
             .set('Accept', 'application/json');
-        this.getPropertyUris();
-        var PropertyUris = JSON.parse(localStorage.getItem("PropertyUris"));
-        if (PropertyUris !== null) {
-            this.baseResourceURL = PropertyUris.baseResourceUrl;
-        }
+        this.baseResourceURL = this.urlService.getBaseResourceUrl();
     }
     DataService.prototype.getToken = function () {
         if (this.localStorageService.getValueFromLocalStorage() !== null)
             return this.token = '?access_token=' + this.localStorageService.getValueFromLocalStorage().access_token;
-    };
-    DataService.prototype.getPropertyUris = function () {
-        var _this = this;
-        var propertyUriUrl;
-        if (location.origin === 'http://localhost:4200') {
-            propertyUriUrl = 'http://localhost:8080';
-        }
-        else {
-            propertyUriUrl = location.origin;
-        }
-        return this.httpClient.get(propertyUriUrl + '/tos-app/properties/uri').toPromise()
-            .then(function (response) {
-            localStorage.setItem("PropertyUris", JSON.stringify(response));
-            _this.PropUris = JSON.stringify(response);
-        });
     };
     DataService.prototype.getEntityData = function (entityName, id) {
         return this.httpClient.get(this.baseResourceURL + entityName + "/" + id + this.getToken()).toPromise()
@@ -3239,14 +3337,13 @@ var DataService = /** @class */ (function () {
             .then(function (response) { return response; });
     };
     DataService.prototype.postUserEntity = function (entityName, entity) {
-        var PropertyUris = JSON.parse(localStorage.getItem("PropertyUris"));
-        return this.httpClient.post(PropertyUris.baseResourceUserUrl + entityName + "/", entity).toPromise()
-            .then(function (response) { return console.log(response); });
+        return this.httpClient.post(this.urlService.getBaseResourceUserUrl() + entityName + "/", entity).toPromise()
+            .then(function (response) { return response; });
     };
     DataService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["b" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_3__localStorage_service__["a" /* LocalStorageService */],
-            __WEBPACK_IMPORTED_MODULE_2__utility_service__["a" /* UtilityService */]])
+            __WEBPACK_IMPORTED_MODULE_2__utility_service__["a" /* UtilityService */], __WEBPACK_IMPORTED_MODULE_4__url_service__["a" /* UrlService */]])
     ], DataService);
     return DataService;
 }());
@@ -3306,12 +3403,34 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 
 var UrlService = /** @class */ (function () {
     function UrlService() {
+        this.tokenApiUrl = '/tos-app/oauth/token';
+        this.appBaseUrl = '/tos-app/index.html';
+        this.baseResourceUrl = '/tos-app/tos/';
+        this.baseResourceUserUrl = '/tos-app/tosuser/';
+        this.propertyUrl = '/properties/uri/'; // Not used for now
+        this.baseUrl = (location.origin === 'http://localhost:4200') ? 'http://localhost:8080' : location.origin;
     }
+    UrlService.prototype.getTokenApiUrl = function () {
+        return this.baseUrl + this.tokenApiUrl;
+    };
+    UrlService.prototype.getAppBaseUrl = function () {
+        return this.baseUrl + this.appBaseUrl;
+    };
+    UrlService.prototype.getBaseResourceUrl = function () {
+        return this.baseUrl + this.baseResourceUrl;
+    };
+    UrlService.prototype.getBaseResourceUserUrl = function () {
+        return this.baseUrl + this.baseResourceUserUrl;
+    };
     UrlService = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])()
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
+        __metadata("design:paramtypes", [])
     ], UrlService);
     return UrlService;
 }());

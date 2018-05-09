@@ -24,9 +24,11 @@ C:\Users\abhinavg\git\TOSBackend\src\main\java\com\tos\service\ProjectRythmServi
 C:\Users\abhinavg\git\TOSBackend\src\main\java\com\tos\model\Employee.java
 C:\Users\abhinavg\git\TOSBackend\src\main\java\com\tos\model\Certification.java
 C:\Users\abhinavg\git\TOSBackend\src\main\java\com\tos\model\ProjectRythm.java
+C:\Users\abhinavg\git\TOSBackend\src\main\java\com\tos\service\AlignService.java
 C:\Users\abhinavg\git\TOSBackend\src\main\java\com\tos\repository\FeedbackRepository.java
 C:\Users\abhinavg\git\TOSBackend\src\main\java\com\tos\repository\TrainingRepository.java
 C:\Users\abhinavg\git\TOSBackend\src\main\java\com\tos\controller\FeedbackController.java
+C:\Users\abhinavg\git\TOSBackend\src\main\java\com\tos\repository\AlignRepository.java
 C:\Users\abhinavg\git\TOSBackend\src\main\java\com\tos\controller\TrainingController.java
 C:\Users\abhinavg\git\TOSBackend\src\main\java\com\tos\model\Team.java
 C:\Users\abhinavg\git\TOSBackend\src\main\java\com\tos\controller\TeamMemberController.java
@@ -35,6 +37,7 @@ C:\Users\abhinavg\git\TOSBackend\src\main\java\com\tos\controller\HomeController
 C:\Users\abhinavg\git\TOSBackend\src\main\java\com\tos\controller\ProjectRythmController.java
 C:\Users\abhinavg\git\TOSBackend\src\main\java\com\tos\repository\CertificationRepository.java
 C:\Users\abhinavg\git\TOSBackend\src\main\java\com\tos\service\CertificationService.java
+C:\Users\abhinavg\git\TOSBackend\src\main\java\com\tos\model\Align.java
 C:\Users\abhinavg\git\TOSBackend\src\main\java\com\tos\service\SkillService.java
 C:\Users\abhinavg\git\TOSBackend\src\main\java\com\tos\controller\StakeHolderController.java
 C:\Users\abhinavg\git\TOSBackend\src\main\java\com\tos\service\UserService.java
@@ -50,6 +53,7 @@ C:\Users\abhinavg\git\TOSBackend\src\main\java\com\tos\model\Customer.java
 C:\Users\abhinavg\git\TOSBackend\src\main\java\com\tos\service\ImprovementAreaService.java
 C:\Users\abhinavg\git\TOSBackend\src\main\java\com\tos\repository\TeamRepository.java
 C:\Users\abhinavg\git\TOSBackend\src\main\java\com\tos\TosApplication.java
+C:\Users\abhinavg\git\TOSBackend\src\main\java\com\tos\controller\AlignController.java
 C:\Users\abhinavg\git\TOSBackend\src\main\java\com\tos\repository\StakeHolderRepository.java
 C:\Users\abhinavg\git\TOSBackend\src\main\java\com\tos\model\Action.java
 C:\Users\abhinavg\git\TOSBackend\src\main\java\com\tos\controller\GoalController.java

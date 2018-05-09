@@ -38,6 +38,7 @@ com\tos\service\CustomerService.class
 com\tos\controller\HomeController.class
 com\tos\controller\UserController.class
 com\tos\service\EmployeeService.class
+com\tos\repository\AlignRepository.class
 com\tos\model\Action.class
 com\tos\model\Feedback.class
 com\tos\model\StakeHolder.class
@@ -47,6 +48,7 @@ com\tos\controller\TeamMemberController.class
 com\tos\controller\TravelController.class
 com\tos\model\Role.class
 com\tos\model\ImprovementArea.class
+com\tos\service\AlignService.class
 com\tos\repository\ProjectRythmRepository.class
 com\tos\model\Skill.class
 com\tos\service\ActionService.class
@@ -60,12 +62,14 @@ com\tos\model\Team.class
 com\tos\repository\TrainingRepository.class
 com\tos\controller\SkillController.class
 com\tos\service\GoalService.class
+com\tos\controller\AlignController.class
 com\tos\repository\TravelRepository.class
 com\tos\model\User.class
 com\tos\repository\GoalRepository.class
 com\tos\controller\FeedbackController.class
 com\tos\model\Uri.class
 com\tos\service\StakeHolderService.class
+com\tos\model\Align.class
 com\tos\repository\CustomerRepository.class
 com\tos\service\TeamMemberService.class
 com\tos\repository\SkillRepository.class
