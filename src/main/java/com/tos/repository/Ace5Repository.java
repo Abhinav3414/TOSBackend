@@ -1,12 +1,10 @@
 package com.tos.repository;
 
-import java.util.List;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.tos.model.Align;
+import com.tos.model.Ace5;
 
-public interface AlignRepository extends JpaRepository<Align, Long> {
+public interface Ace5Repository extends JpaRepository<Ace5, Long> {
 
-	//List<Align> getAlignByCustomerId(Long customerId);
+	Ace5 getAce5ByCustomerId(Long customerId);
 }

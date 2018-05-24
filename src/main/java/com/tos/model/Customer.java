@@ -17,6 +17,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -36,10 +37,24 @@ public class Customer {
 	private String domain;
 	private String address;
 	private String country;
+	private String expectationFromOpd;
+	private String process;
+	private String processTools;
+	private String solutionProduct;
+	private String databaseUsed;
+	private String operatingEnvironment;
+	private String remoteMachineDetails;
+	private String vpnDetails;
+	private String communicator;
+	private String skillsReuired;
 
 	@OneToMany(cascade = CascadeType.ALL, targetEntity = Goal.class)
 	@JoinColumn(name = "goal_cust_id")
 	private List<Goal> goals;
+
+	@OneToMany(cascade = CascadeType.ALL, targetEntity = Action.class)
+	@JoinColumn(name = "action_cust_id")
+	private List<Action> actions;
 
 	@OneToMany(cascade = CascadeType.ALL, targetEntity = StakeHolder.class)
 	@JoinColumn(name = "stakeholder_cust_id")
@@ -54,7 +69,7 @@ public class Customer {
 	private List<Travel> travels;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@LastModifiedDate
+	@CreatedDate
 	private Date createdAt;
 
 	public Customer() {
@@ -117,12 +132,100 @@ public class Customer {
 		this.country = country;
 	}
 
+	public String getExpectationFromOpd() {
+		return expectationFromOpd;
+	}
+
+	public void setExpectationFromOpd(String expectationFromOpd) {
+		this.expectationFromOpd = expectationFromOpd;
+	}
+
+	public String getProcess() {
+		return process;
+	}
+
+	public void setProcess(String process) {
+		this.process = process;
+	}
+
+	public String getProcessTools() {
+		return processTools;
+	}
+
+	public void setProcessTools(String processTools) {
+		this.processTools = processTools;
+	}
+
+	public String getSolutionProduct() {
+		return solutionProduct;
+	}
+
+	public void setSolutionProduct(String solutionProduct) {
+		this.solutionProduct = solutionProduct;
+	}
+
+	public String getDatabaseUsed() {
+		return databaseUsed;
+	}
+
+	public void setDatabaseUsed(String databaseUsed) {
+		this.databaseUsed = databaseUsed;
+	}
+
+	public String getOperatingEnvironment() {
+		return operatingEnvironment;
+	}
+
+	public void setOperatingEnvironment(String operatingEnvironment) {
+		this.operatingEnvironment = operatingEnvironment;
+	}
+
+	public String getRemoteMachineDetails() {
+		return remoteMachineDetails;
+	}
+
+	public void setRemoteMachineDetails(String remoteMachineDetails) {
+		this.remoteMachineDetails = remoteMachineDetails;
+	}
+
+	public String getVpnDetails() {
+		return vpnDetails;
+	}
+
+	public void setVpnDetails(String vpnDetails) {
+		this.vpnDetails = vpnDetails;
+	}
+
+	public String getCommunicator() {
+		return communicator;
+	}
+
+	public void setCommunicator(String communicator) {
+		this.communicator = communicator;
+	}
+
+	public String getSkillsReuired() {
+		return skillsReuired;
+	}
+
+	public void setSkillsReuired(String skillsReuired) {
+		this.skillsReuired = skillsReuired;
+	}
+
 	public List<Goal> getGoals() {
 		return goals;
 	}
 
 	public void setGoals(List<Goal> goals) {
 		this.goals = goals;
+	}
+
+	public List<Action> getActions() {
+		return actions;
+	}
+
+	public void setActions(List<Action> actions) {
+		this.actions = actions;
 	}
 
 	public List<StakeHolder> getStakeHolders() {
@@ -157,4 +260,5 @@ public class Customer {
 		this.createdAt = createdAt;
 	}
 
+	
 }

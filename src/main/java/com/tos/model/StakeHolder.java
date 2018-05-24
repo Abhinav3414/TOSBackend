@@ -16,29 +16,31 @@ import javax.validation.constraints.NotNull;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-@Entity(name="StakeHolder")
-@Table(name="StakeHolder")
+@Entity(name = "StakeHolder")
+@Table(name = "StakeHolder")
 @EntityListeners(AuditingEntityListener.class)
 public class StakeHolder {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
+
 	private String name;
-	
+
 	@NotNull
-	@Column(name="stakeholder_cust_id")
+	@Column(name = "stakeholder_cust_id")
 	private Long customerId;
-	
+
 	private String role;
-	
+
 	private String email;
-	
+
 	private String phoneNo;
-	
+
 	private boolean isContactPerson;
-	
+
+	private boolean isInternalEmployee;
+
 	@Temporal(TemporalType.TIMESTAMP)
 	@LastModifiedDate
 	private Date createdAt;
@@ -100,6 +102,14 @@ public class StakeHolder {
 
 	public void setContactPerson(boolean isContactPerson) {
 		this.isContactPerson = isContactPerson;
+	}
+
+	public boolean isInternalEmployee() {
+		return isInternalEmployee;
+	}
+
+	public void setInternalEmployee(boolean isInternalEmployee) {
+		this.isInternalEmployee = isInternalEmployee;
 	}
 
 	public Date getCreatedAt() {

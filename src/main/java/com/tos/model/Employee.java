@@ -16,6 +16,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -34,7 +35,7 @@ public class Employee {
 	private String responsibilities;
 	
 	@Temporal(TemporalType.TIMESTAMP)
-	@LastModifiedDate
+	@CreatedDate
 	private Date createdAt;
 	
 	@OneToMany(cascade = CascadeType.ALL, targetEntity= Skill.class)

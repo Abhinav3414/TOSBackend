@@ -16,27 +16,36 @@ import javax.validation.constraints.NotNull;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-@Entity(name="Action")
-@Table(name="Action")
+@Entity(name = "Action")
+@Table(name = "Action")
 @EntityListeners(AuditingEntityListener.class)
 public class Action {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
+
 	private String details;
 	
-	@NotNull
-	@Column(name="action_team_id")
+	private Long goalId;
+	
+	private String actionType;
+
+	@Column(name = "action_team_id")
 	private Long teamId;
-	
+
+	@Column(name = "action_cust_id")
+	private Long customerId;
+
+	@Column(name = "action_ace5_id")
+	private Long ace5Id;
+
 	private String cause;
-	
+
 	private String platform;
-	
+
 	private String status;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	@LastModifiedDate
 	private Date createdAt;
@@ -60,12 +69,44 @@ public class Action {
 		this.details = details;
 	}
 
+	public Long getGoalId() {
+		return goalId;
+	}
+
+	public void setGoalId(Long goalId) {
+		this.goalId = goalId;
+	}
+
+	public String getActionType() {
+		return actionType;
+	}
+
+	public void setActionType(String actionType) {
+		this.actionType = actionType;
+	}
+
 	public Long getTeamId() {
 		return teamId;
 	}
 
 	public void setTeamId(Long teamId) {
 		this.teamId = teamId;
+	}
+
+	public Long getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(Long customerId) {
+		this.customerId = customerId;
+	}
+
+	public Long getAce5Id() {
+		return ace5Id;
+	}
+
+	public void setAce5Id(Long ace5Id) {
+		this.ace5Id = ace5Id;
 	}
 
 	public String getCause() {
@@ -99,5 +140,7 @@ public class Action {
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
+
+	
 
 }

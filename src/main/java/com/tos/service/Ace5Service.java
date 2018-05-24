@@ -5,45 +5,46 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.tos.model.Align;
-import com.tos.repository.AlignRepository;
+import com.tos.model.Ace5;
+import com.tos.model.Action;
+import com.tos.repository.Ace5Repository;
 
 @Service
-public class AlignService {
+public class Ace5Service {
 	
 	@Autowired
-	private AlignRepository alignRepository;
+	private Ace5Repository ace5Repository;
 	
-	/* search all aligns*/
-	public List<Align> getAllAlign() {
-		return alignRepository.findAll();
+	/* search all ace5s*/
+	public List<Ace5> getAllAce5() {
+		return ace5Repository.findAll();
 	}
 	
-	/*to save a align */
-	public Align addAlign(Align align) {
-		return alignRepository.save(align);
+	/*to save a ace5 */
+	public Ace5 addAce5(Ace5 ace5) {
+		return ace5Repository.save(ace5);
 	}
 	
-	/*get a align by id*/
-	public Align getAlign(Long alignId) {
-		return alignRepository.findOne(alignId);
+	/*get a ace5 by id*/
+	public Ace5 getAce5(Long customerId) {
+		return ace5Repository.getAce5ByCustomerId(customerId);
 	}
 
-	/*to update a align*/
-	public Align updateAlign(Align alignData, long id) {
-		if(alignRepository.findOne(id)==null) {
+	/*to update a ace5*/
+	public Ace5 updateAce5(Ace5 ace5Data, long id) {
+		if(ace5Repository.findOne(id)==null) {
 			return null;
 		}
-		return alignRepository.save(alignData);
+		return ace5Repository.save(ace5Data);
 	}
 	
-	/*delete a align*/
+	/*delete a ace5*/
 	
-	public boolean deleteAlign(Long alignId) {
-		if(alignRepository.findOne(alignId)==null) {
+	public boolean deleteAce5(Long ace5Id) {
+		if(ace5Repository.findOne(ace5Id)==null) {
 			return false;
 		}
-		alignRepository.delete(alignId);
+		ace5Repository.delete(ace5Id);
 		return true;
 	}
 	
